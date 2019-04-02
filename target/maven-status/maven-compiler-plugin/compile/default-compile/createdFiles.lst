@@ -1,0 +1,6 @@
+com\restowa\domain\model\UserAccount.class
+com\restowa\domain\repository\UserAccountRepository.class
+com\restowa\bl\concrete\UserAccountManager.class
+com\restowa\config\AppConfig.class
+com\restowa\controllers\DefaultController.class
+com\restowa\config\WebInitializer.class
