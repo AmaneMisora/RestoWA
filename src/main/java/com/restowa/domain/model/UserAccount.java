@@ -1,169 +1,167 @@
 package com.restowa.domain.model;
 
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "useraccounts")
 public class UserAccount implements Serializable {
 
     @Id
-    @Column(name = "id")
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private int ID;
 
-    @Column(name = "firstname")
+    @Column(name = "fistname")
     private String name;
-
-    public int getID() {
-        return ID;
-    }
+    
+    @Column(name = "lastname")
+    private String lastname;
+    
+    @Column(name = "email")
+    private String email;
+    
+    @Column(name = "password")
+    private String password;
+    
+    @Column(name = "phonenumber")
+    private String phoneNumber;
+    
+    @Column(name = "active")
+    private boolean active;
+    
+    @Temporal(TemporalType.DATE)
+    @Column(name = "creationdate")
+    private String creationDate;
+    
+    @Temporal(TemporalType.DATE)
+    @Column(name = "lastmodificationdate")
+    private String lastModificationDate;
+    
+    @Column(name = "resetpasswordlink")
+    private String resetPasswordLink;
+    
+    @Temporal(TemporalType.DATE)
+    @Column(name = "restelinkvalidatedate")
+    private String resetLinkValidateDate; 
+    
+    @Column(name = "isremoved")
+    private boolean isRemoved;
+    
+    @Enumerated(EnumType.STRING)
+    private TypeEnum type;
+   
+    @Embedded
+    private Address address;
 
     public void setID(int ID) {
         this.ID = ID;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-//    @Id
-//    @Column(name = "CUSTOMER_ID")
-//    private int id;
-//    
-//    @Column(name = "DISCOUNT_CODE")
-//    private String DiscountCode;
-//    
-//    @Column(name = "ZIP")
-//    private String Zip;
-//    
-//    @Column(name = "NAME")
-//    private String Name;
-//    
-//    @Column(name = "ADDRESSLINE1")
-//    private String AddressLine1;
-//    
-//    @Column(name = "ADDRESSLINE2")
-//    private String AddressLine2;
-//    
-//    @Column(name = "CITY")
-//    private String City;
-//    
-//    @Column(name = "STATE")
-//    private String State;
-//    
-//    @Column(name = "PHONE")
-//    private String Phone;
-//    
-//    @Column(name = "FAX")
-//    private String Fax;
-//    
-//    @Column(name = "EMAIL")
-//    private String Email;
-//    
-//    @Column(name = "CREDIT_LIMIT")
-//    private String CreditLimit;
-//
-//    public int getId() {
-//        return id;
-//    }
-//
-//    public void setId(int id) {
-//        this.id = id;
-//    }
-//
-//    public String getDiscountCode() {
-//        return DiscountCode;
-//    }
-//
-//    public void setDiscountCode(String DiscountCode) {
-//        this.DiscountCode = DiscountCode;
-//    }
-//
-//    public String getZip() {
-//        return Zip;
-//    }
-//
-//    public void setZip(String Zip) {
-//        this.Zip = Zip;
-//    }
-//
-//    public String getName() {
-//        return Name;
-//    }
-//
-//    public void setName(String Name) {
-//        this.Name = Name;
-//    }
-//
-//    public String getAddressLine1() {
-//        return AddressLine1;
-//    }
-//
-//    public void setAddressLine1(String AddressLine1) {
-//        this.AddressLine1 = AddressLine1;
-//    }
-//
-//    public String getAddressLine2() {
-//        return AddressLine2;
-//    }
-//
-//    public void setAddressLine2(String AddressLine2) {
-//        this.AddressLine2 = AddressLine2;
-//    }
-//
-//    public String getCity() {
-//        return City;
-//    }
-//
-//    public void setCity(String City) {
-//        this.City = City;
-//    }
-//
-//    public String getState() {
-//        return State;
-//    }
-//
-//    public void setState(String State) {
-//        this.State = State;
-//    }
-//
-//    public String getPhone() {
-//        return Phone;
-//    }
-//
-//    public void setPhone(String Phone) {
-//        this.Phone = Phone;
-//    }
-//
-//    public String getFax() {
-//        return Fax;
-//    }
-//
-//    public void setFax(String Fax) {
-//        this.Fax = Fax;
-//    }
-//
-//    public String getEmail() {
-//        return Email;
-//    }
-//
-//    public void setEmail(String Email) {
-//        this.Email = Email;
-//    }
-//
-//    public String getCreditLimit() {
-//        return CreditLimit;
-//    }
-//
-//    public void setCreditLimit(String CreditLimit) {
-//        this.CreditLimit = CreditLimit;
-//    }
-//
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public void setCreationDate(String creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public void setLastModificationDate(String lastModificationDate) {
+        this.lastModificationDate = lastModificationDate;
+    }
+
+    public void setResetPasswordLink(String resetPasswordLink) {
+        this.resetPasswordLink = resetPasswordLink;
+    }
+
+    public void setResetLinkValidateDate(String resetLinkValidateDate) {
+        this.resetLinkValidateDate = resetLinkValidateDate;
+    }
+
+    public void setIsRemoved(boolean isRemoved) {
+        this.isRemoved = isRemoved;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }  
+
+    public void setType(TypeEnum type) {
+        this.type = type;
+    }
+    
+    public int getID() {
+        return ID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public String getCreationDate() {
+        return creationDate;
+    }
+
+    public String getLastModificationDate() {
+        return lastModificationDate;
+    }
+
+    public String getResetPasswordLink() {
+        return resetPasswordLink;
+    }
+
+    public String getResetLinkValidateDate() {
+        return resetLinkValidateDate;
+    }
+
+    public boolean isIsRemoved() {
+        return isRemoved;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public TypeEnum getType() {
+        return type;
+    }
 }
