@@ -37,6 +37,9 @@ public class AppConfig implements WebMvcConfigurer {
     private static final String PROPERTY_NAME_HIBERNATE_DIALECT = "hibernate.dialect";
     private static final String PROPERTY_NAME_HIBERNATE_SHOW_SQL = "hibernate.show_sql";
     private static final String PROPERTY_NAME_ENTITYMANAGER_PACKAGES_TO_SCAN = "entitymanager.packages.to.scan";
+    //private static final String PROPERTY_NAME_HIBERNATE_HBM2DDL_AUTO = "create"; 
+    
+    //private static final String PROPERTY_NAME_HIBERNATE_HBM2DDL_AUTO = "update";
 
     @Resource
     private Environment env;
@@ -49,7 +52,7 @@ public class AppConfig implements WebMvcConfigurer {
         dataSource.setUrl(env.getRequiredProperty(PROPERTY_NAME_DATABASE_URL));
         dataSource.setUsername(env.getRequiredProperty(PROPERTY_NAME_DATABASE_USERNAME));
         dataSource.setPassword(env.getRequiredProperty(PROPERTY_NAME_DATABASE_PASSWORD));
-
+        
         return dataSource;
     }
 
@@ -70,6 +73,7 @@ public class AppConfig implements WebMvcConfigurer {
         Properties properties = new Properties();
         properties.put(PROPERTY_NAME_HIBERNATE_DIALECT, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_DIALECT));
         properties.put(PROPERTY_NAME_HIBERNATE_SHOW_SQL, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_SHOW_SQL));
+        //properties.put(PROPERTY_NAME_HIBERNATE_HBM2DDL_AUTO, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_HBM2DDL_AUTO));
         return properties;
     }
 

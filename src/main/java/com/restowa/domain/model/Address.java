@@ -21,7 +21,7 @@ public class Address {
     @Column(name = "city")
     private String City;
     
-    @Column(name = "state")
+    @Column(name = "stateuser")
     private String State;
     
     @Column(name = "zipcode")

@@ -1,6 +1,7 @@
 package com.restowa.domain.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.*;
 
 @Entity
@@ -31,18 +32,18 @@ public class UserAccount implements Serializable {
     
     @Temporal(TemporalType.DATE)
     @Column(name = "creationdate")
-    private String creationDate;
+    private Date creationDate;
     
     @Temporal(TemporalType.DATE)
     @Column(name = "lastmodificationdate")
-    private String lastModificationDate;
+    private Date lastModificationDate;
     
     @Column(name = "resetpasswordlink")
     private String resetPasswordLink;
     
     @Temporal(TemporalType.DATE)
     @Column(name = "restelinkvalidatedate")
-    private String resetLinkValidateDate; 
+    private Date resetLinkValidateDate; 
     
     @Column(name = "isremoved")
     private boolean isRemoved;
@@ -81,11 +82,11 @@ public class UserAccount implements Serializable {
         this.active = active;
     }
 
-    public void setCreationDate(String creationDate) {
+    public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
 
-    public void setLastModificationDate(String lastModificationDate) {
+    public void setLastModificationDate(Date lastModificationDate) {
         this.lastModificationDate = lastModificationDate;
     }
 
@@ -93,7 +94,7 @@ public class UserAccount implements Serializable {
         this.resetPasswordLink = resetPasswordLink;
     }
 
-    public void setResetLinkValidateDate(String resetLinkValidateDate) {
+    public void setResetLinkValidateDate(Date resetLinkValidateDate) {
         this.resetLinkValidateDate = resetLinkValidateDate;
     }
 
@@ -137,11 +138,11 @@ public class UserAccount implements Serializable {
         return active;
     }
 
-    public String getCreationDate() {
+    public Date getCreationDate() {
         return creationDate;
     }
 
-    public String getLastModificationDate() {
+    public Date getLastModificationDate() {
         return lastModificationDate;
     }
 
@@ -149,11 +150,11 @@ public class UserAccount implements Serializable {
         return resetPasswordLink;
     }
 
-    public String getResetLinkValidateDate() {
+    public Date getResetLinkValidateDate() {
         return resetLinkValidateDate;
     }
 
-    public boolean isIsRemoved() {
+    public boolean IsRemoved() {
         return isRemoved;
     }
 
