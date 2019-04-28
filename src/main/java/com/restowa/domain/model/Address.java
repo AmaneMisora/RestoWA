@@ -6,6 +6,8 @@
 package com.restowa.domain.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -14,60 +16,68 @@ import javax.persistence.*;
 
 @Embeddable
 public class Address {
-       
+    
+    @NotEmpty
     @Column(name = "street")
-    private String Street;
+    private String street;
     
+    @NotEmpty
     @Column(name = "city")
-    private String City;
+    private String city;
     
-    @Column(name = "stateuser")
-    private String State;
+    @NotEmpty
+    @Column(name = "state")
+    private String state;
     
+    @NotNull
     @Column(name = "zipcode")
-    private int ZipCode;
+    private int zipCode;
     
+    @NotEmpty
     @Column(name = "country")
-    private String Country;
+    private String country;
     
-
+    public Address() {
+        
+    }
+    
     public String getStreet() {
-        return Street;
+        return street;
     }
 
-    public void setStreet(String Street) {
-        this.Street = Street;
+    public void setStreet(String street) {
+        this.street = street;
     }
 
     public String getCity() {
-        return City;
+        return city;
     }
 
-    public void setCity(String City) {
-        this.City = City;
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getState() {
-        return State;
+        return state;
     }
 
-    public void setState(String State) {
-        this.State = State;
+    public void setState(String state) {
+        this.state = state;
     }
 
     public int getZipCode() {
-        return ZipCode;
+        return zipCode;
     }
 
-    public void setZipCode(int ZipCode) {
-        this.ZipCode = ZipCode;
+    public void setZipCode(int zipCode) {
+        this.zipCode = zipCode;
     }
 
     public String getCountry() {
-        return Country;
+        return country;
     }
 
-    public void setCountry(String Country) {
-        this.Country = Country;
+    public void setCountry(String country) {
+        this.country = country;
     }
 }

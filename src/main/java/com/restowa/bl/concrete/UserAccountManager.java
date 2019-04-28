@@ -18,4 +18,8 @@ public class UserAccountManager {
     public UserAccount getUserAccountById(int id) {
         return this.repo.findById(id).get();
     }
+    
+    public UserAccount saveUserAccount(UserAccount ua) {
+        return this.repo.save(ua);
+    }
 }

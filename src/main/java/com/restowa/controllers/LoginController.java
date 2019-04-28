@@ -8,34 +8,43 @@ package com.restowa.controllers;
 import com.restowa.domain.model.UserAccount;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  *
  * @author yanis
  */
 @Controller
-public class LoginController {
-    
+public class LoginController implements WebMvcConfigurer{
     
     private static final Logger LOGGER = Logger.getLogger(LoginController.class.getName());
     //public UserService userService;
     
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    //@RequestMapping(value = "/login", method = RequestMethod.GET)
+    @GetMapping("/login")
     public String login(Model model) {
-        model.addAttribute("userForm", new UserAccount());
         LOGGER.log(Level.INFO, "Test de logger");
+        
+        model.addAttribute("userAccount", new UserAccount());
 
         return "login";
     }
-    /*
-    @RequestMapping(value = "/registerProcess", method = RequestMethod.POST)
-    public ModelAndView addUser(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("user") User user) {
-        userService.register(user);
-        return new ModelAndView("welcome", "firstname", user.getFirstname());
+    
+    @PostMapping("/login")
+    public String checkPersonInfo(@Valid UserAccount userAccount, BindingResult bindingResult, Model model) {
+
+        if (bindingResult.hasErrors()) {
+            return "login";
+        }
+
+        // /!\/!\/!\ Retourner vers la page après connexion lorsqu'elle existe /!\/!\/!\
+        return "redirect:/";
     }
-*/
 }

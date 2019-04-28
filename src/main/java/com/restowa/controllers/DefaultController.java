@@ -1,6 +1,7 @@
 
 package com.restowa.controllers;
 
+import com.restowa.DAO.UserAccountDAO;
 import com.restowa.bl.concrete.UserAccountManager;
 import com.restowa.domain.model.UserAccount;
 import javax.annotation.Resource;
@@ -21,13 +22,16 @@ public class DefaultController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     //@Transactional
     public String index(ModelMap map) {
-        
+        UserAccount ua = new UserAccount();
+        //uamanager.saveUserAccount(ua);
         //UserAccount ua = repo.findById(1).get();
+        /*
         UserAccount ua = uamanager.getUserAccountById(1);
         
         map.put("msg", "Hello Spring 5 Web MVC!");
         map.put("userId", ua.getID());
         map.put("userName", ua.getName());
+*/
         return "index";
     }
 }
