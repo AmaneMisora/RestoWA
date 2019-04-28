@@ -6,13 +6,20 @@
 package com.restowa.controllers;
 
 
+import com.restowa.domain.model.Address;
 import com.restowa.domain.model.UserAccount;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,19 +30,26 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class RegistrationController {
     
+    private static final Logger LOGGER = Logger.getLogger(LoginController.class.getName());
     //public UserService userService;
     
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    
+    @GetMapping("/register")
     public String register(Model model) {
-        model.addAttribute("userForm", new UserAccount());
+        model.addAttribute("userAccount", new UserAccount());
+        model.addAttribute("address", new Address());
 
         return "register";
     }
-    /*
-    @RequestMapping(value = "/registerProcess", method = RequestMethod.POST)
-    public ModelAndView addUser(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("user") User user) {
-        userService.register(user);
-        return new ModelAndView("welcome", "firstname", user.getFirstname());
+    
+    @PostMapping("/register")
+    public String checkAndCreateUserAccount(@Valid UserAccount userAccount, BindingResult userAccountResult, @Valid Address address, BindingResult addressResult, Model model) {
+
+        if (userAccountResult.hasErrors() || addressResult.hasErrors()) {
+            return "register";
+        }
+
+        // /!\/!\/!\ Retourner vers la page après connexion lorsqu'elle existe /!\/!\/!\
+        return "redirect:/";
     }
-*/
 }

@@ -34,14 +34,14 @@ public class UserAccountDAO {
      * @param Country
      * @return L'instance créée de Useraccount
      */
-    public static UserAccount creatUserAccount(String name, String lastname, String email, String password, String phoneNumber, TypeEnum type, String Street, String City, String State, int ZipCode, String Country)
+    public static UserAccount creatUserAccount(String firstname, String lastname, String email, String password, String phoneNumber, TypeEnum type, String Street, String City, String State, int ZipCode, String Country)
     {
         EntityManager em = MainDAO.getEntityManager();
         //instentiation
         UserAccount useraccount = new UserAccount();
         //parameres useraccount
-        useraccount.setName(name);
-        useraccount.setLastname(lastname);
+        useraccount.setFirstName(firstname);
+        useraccount.setLastName(lastname);
         useraccount.setEmail(email);
         useraccount.setPassword(password);
         useraccount.setPhoneNumber(phoneNumber);
@@ -55,7 +55,7 @@ public class UserAccountDAO {
         address.setCountry(Country);
         address.setZipCode(ZipCode);
         //ajout de l'adresse a useraccount
-        useraccount.setAddress(address);
+        //useraccount.setAddress(address);
 		
 	em.getTransaction().begin();
         em.persist(address);
@@ -64,6 +64,7 @@ public class UserAccountDAO {
         
         return useraccount;
     }
+    
     /*
     public static UserAccount GetUserByID(EntityManager em, int ID)
     {
@@ -94,6 +95,16 @@ public class UserAccountDAO {
         }
                 
 	return false;	
+    }
+    
+    public static UserAccount saveUser(UserAccount ua) {
+        EntityManager em = MainDAO.getEntityManager();
+        
+        em.getTransaction().begin();
+        em.persist(ua);
+	em.getTransaction().commit();
+        
+        return ua;
     }
     
     
