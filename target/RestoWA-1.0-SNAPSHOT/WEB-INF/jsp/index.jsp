@@ -5,19 +5,15 @@
     <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <title>Welcome</title>
+        <link rel='stylesheet' href='${cp}/webjars/bootstrap/4.3.1/css/bootstrap.min.css'>
+        <script src='${cp}/webjars/jquery/3.3.1/jquery.min.js'></script>
+        <script src='${cp}/webjars/bootstrap/4.3.1/js/bootstrap.min.js'></script>
+        <title>RestoWA</title>
     </head>
     <body>
-        <table align="center">
-            <tr>
-                <td><a href="${cp}/login">Login</a>
-                </td>
-                <td><a href="${cp}/register">Register</a>
-                </td>
-            </tr>
-        </table>
+        <%@include file="jspf/unloggedHeader.jspf" %>
     </body>
-    </html>
+</html>
 <!--
 <html> 
     <head> 

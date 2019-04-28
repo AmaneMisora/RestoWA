@@ -3,20 +3,23 @@ package com.restowa.domain.model;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "useraccounts")
 public class UserAccount implements Serializable {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private int ID;
+    private int id;
 
-    @Column(name = "fistname")
-    private String name;
+    @NotEmpty
+    @Column(name = "firstname")
+    private String firstName;
     
+    @NotEmpty
     @Column(name = "lastname")
-    private String lastname;
+    private String lastName;
     
     @Column(name = "email")
     private String email;
@@ -49,120 +52,138 @@ public class UserAccount implements Serializable {
     private boolean isRemoved;
     
     @Enumerated(EnumType.STRING)
+    @Column(name = "type")
     private TypeEnum type;
-   
+    
     @Embedded
     private Address address;
-
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public void setLastModificationDate(Date lastModificationDate) {
-        this.lastModificationDate = lastModificationDate;
-    }
-
-    public void setResetPasswordLink(String resetPasswordLink) {
-        this.resetPasswordLink = resetPasswordLink;
-    }
-
-    public void setResetLinkValidateDate(Date resetLinkValidateDate) {
-        this.resetLinkValidateDate = resetLinkValidateDate;
-    }
-
-    public void setIsRemoved(boolean isRemoved) {
-        this.isRemoved = isRemoved;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }  
-
-    public void setType(TypeEnum type) {
-        this.type = type;
+    
+    public UserAccount() {
+        /*
+        firstname = "admin";
+        lastname = "admin";
+        email = "admin@admin.admin";
+        password = "admin";
+        phoneNumber = "0000000000";
+        active = true;
+        creationDate = new Date();
+        lastModificationDate = new Date();
+        resetPasswordLink = "tttt";
+        resetLinkValidateDate = new Date();
+        isRemoved = false;
+        type = TypeEnum.Administrateur;
+        */
     }
     
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getName() {
-        return name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
+    }
+    
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
         return email;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getPassword() {
         return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public boolean isActive() {
         return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public Date getCreationDate() {
         return creationDate;
     }
 
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
     public Date getLastModificationDate() {
         return lastModificationDate;
+    }
+
+    public void setLastModificationDate(Date lastModificationDate) {
+        this.lastModificationDate = lastModificationDate;
     }
 
     public String getResetPasswordLink() {
         return resetPasswordLink;
     }
 
+    public void setResetPasswordLink(String resetPasswordLink) {
+        this.resetPasswordLink = resetPasswordLink;
+    }
+
     public Date getResetLinkValidateDate() {
         return resetLinkValidateDate;
+    }
+
+    public void setResetLinkValidateDate(Date resetLinkValidateDate) {
+        this.resetLinkValidateDate = resetLinkValidateDate;
     }
 
     public boolean IsRemoved() {
         return isRemoved;
     }
-
-    public Address getAddress() {
-        return address;
+    
+    public void setIsRemoved(boolean isRemoved) {
+        this.isRemoved = isRemoved;
     }
-
+    
     public TypeEnum getType() {
         return type;
+    }
+    
+    public void setType(TypeEnum type) {
+        this.type = type;
+    }
+    
+    public Address getAddress() {
+        return this.address;
+    }
+    
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }

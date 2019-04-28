@@ -1,36 +1,28 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="cp" value="${pageContext.request.servletContext.contextPath}" scope="request" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-        <title>Login Page</title>
-        <link href="css/style.css" rel="stylesheet" type="text/css" />
+        <link rel='stylesheet' href='${cp}/webjars/bootstrap/4.3.1/css/bootstrap.min.css'>
+        <script src='${cp}/webjars/jquery/3.3.1/jquery.min.js'></script>
+        <script src='${cp}/webjars/bootstrap/4.3.1/js/bootstrap.min.js'></script>
+        <title>Connection</title>
     </head>
     <body>
-        <form method="post" action="LoginServlet">
-            <div style="padding: 100px 0 0 250px;">
-                <div id="login-box">
-                    <h2>Login Page</h2>
-                    Please provide your credential to use this website
-                    <br>
-                    <br>
-                    <div id="login-box-name" style="margin-top:20px;">User Id:</div>
-                    <div id="login-box-field" style="margin-top:20px;">
-                    <input name="userId" class="form-login" title="Username" value="" size="30" maxlength="50" />
+        <%@include file="jspf/unloggedHeader.jspf" %>
+        <div class="col-sm-6 offset-sm-3 mt-5">
+            <h1 class="display-4">Connection</h1>
+            <form:form method="POST" modelAttribute="userAccount" action="${cp}/login">
+                <div class="form-group">
+                    <label for="nameInput">Nom</label>
+                    <form:input path="firstName" class="form-control" id="nameInput" aria-describedby="nameInput" placeholder="Nom" />
+                    <small id="nameInput" class="form-text text-danger font-weight-bold"><form:errors path="firstName" /></small>
                 </div>
-                <div id="login-box-name">Password:</div>
-                    <div id="login-box-field">
-                        <input name="password" type="password" class="form-login" title="Password" value="" size="30" maxlength="48" />
-                    </div>
-                    <br />
-                    <span class="login-box-options">
-                        New User?  <a href="register.jsp" style="margin-left:30px;">Register Here</a>
-                    </span>
-                    <br />
-                    <br />
-                    <input style="margin-left:100px;" type="submit" value="Login" />
-                </div>
-            </div>
-        </form>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form:form>
+        </div>
     </body>
 </html>

@@ -1,4 +1,5 @@
 com\restowa\domain\model\Login.class
+com\restowa\service\StoreService.class
 com\restowa\domain\model\UserAccount.class
 com\restowa\controllers\LoginController.class
 com\restowa\controllers\RegistrationController.class
@@ -9,5 +10,7 @@ com\restowa\DAO\UserAccountDAO.class
 com\restowa\DAO\MainDAO.class
 com\restowa\config\AppConfig.class
 com\restowa\controllers\DefaultController.class
+com\restowa\service\UserService.class
+com\restowa\utils\TokenManagement.class
 com\restowa\config\WebInitializer.class
 com\restowa\domain\model\Address.class
