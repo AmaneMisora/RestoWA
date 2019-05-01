@@ -22,7 +22,7 @@ import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
 @Configuration
-@ComponentScan({"com.restowa.controllers", "com.restowa.bl.concrete"})
+@ComponentScan({"com.restowa.controllers", "com.restowa.bl.concrete", "com.restowa.service"})
 @EnableWebMvc
 @EnableTransactionManagement
 @PropertySource("classpath:application.properties")

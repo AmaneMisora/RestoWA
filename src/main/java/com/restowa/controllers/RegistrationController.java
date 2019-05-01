@@ -6,10 +6,14 @@
 package com.restowa.controllers;
 
 
+import com.restowa.bl.concrete.UserAccountManager;
 import com.restowa.domain.model.Address;
+import com.restowa.domain.model.TypeEnum;
 import com.restowa.domain.model.UserAccount;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -17,6 +21,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,6 +39,8 @@ public class RegistrationController {
     private static final Logger LOGGER = Logger.getLogger(LoginController.class.getName());
     //public UserService userService;
     
+    @Resource
+    UserAccountManager uamanager;
     
     @GetMapping("/register")
     public String register(Model model) {
@@ -47,8 +55,22 @@ public class RegistrationController {
 
         if (userAccountResult.hasErrors() || addressResult.hasErrors()) {
             return "register";
+        }else if(!uamanager.getUserAccountByEmail(userAccount.getEmail()).isEmpty()) {
+            userAccountResult.addError(new FieldError("UserAccount", "email", "Cet email est déjà utilisé"));
+            return "register";
         }
 
+        Date date = new Date();
+        
+        userAccount.setActive(true);
+        userAccount.setAddress(address);
+        userAccount.setCreationDate(date);
+        userAccount.setIsRemoved(false);
+        userAccount.setLastModificationDate(date);
+        userAccount.setType(TypeEnum.Client);
+        uamanager.saveUserAccount(userAccount);
+        
+        
         // /!\/!\/!\ Retourner vers la page après connexion lorsqu'elle existe /!\/!\/!\
         return "redirect:/";
     }

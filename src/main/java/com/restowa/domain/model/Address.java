@@ -6,8 +6,10 @@
 package com.restowa.domain.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 /**
  *
@@ -29,7 +31,6 @@ public class Address {
     @Column(name = "state")
     private String state;
     
-    @NotNull
     @Column(name = "zipcode")
     private int zipCode;
     

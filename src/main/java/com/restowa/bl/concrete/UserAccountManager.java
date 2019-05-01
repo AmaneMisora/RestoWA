@@ -2,6 +2,7 @@ package com.restowa.bl.concrete;
 
 import com.restowa.domain.model.UserAccount;
 import com.restowa.domain.repository.UserAccountRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,5 +22,9 @@ public class UserAccountManager {
     
     public UserAccount saveUserAccount(UserAccount ua) {
         return this.repo.save(ua);
+    }
+    
+    public List<UserAccount> getUserAccountByEmail(String email) {
+        return this.repo.getUserAccountByEmail(email);
     }
 }

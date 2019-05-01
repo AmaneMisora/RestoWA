@@ -6,11 +6,14 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import com.restowa.validators.UniqueEmailConstraint;
+import javax.validation.constraints.Email;
 
 @Entity
 public class UserAccount implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @NotEmpty
@@ -21,12 +24,16 @@ public class UserAccount implements Serializable {
     @Column(name = "lastname")
     private String lastName;
     
+    @NotEmpty
+    @Email
     @Column(name = "email")
     private String email;
     
+    @NotEmpty
     @Column(name = "password")
     private String password;
     
+    @NotEmpty
     @Column(name = "phonenumber")
     private String phoneNumber;
     
@@ -59,20 +66,7 @@ public class UserAccount implements Serializable {
     private Address address;
     
     public UserAccount() {
-        /*
-        firstname = "admin";
-        lastname = "admin";
-        email = "admin@admin.admin";
-        password = "admin";
-        phoneNumber = "0000000000";
-        active = true;
-        creationDate = new Date();
-        lastModificationDate = new Date();
-        resetPasswordLink = "tttt";
-        resetLinkValidateDate = new Date();
-        isRemoved = false;
-        type = TypeEnum.Administrateur;
-        */
+        
     }
     
     public int getId() {
