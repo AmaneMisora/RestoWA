@@ -11,12 +11,16 @@ import com.restowa.bl.concrete.UserAccountManager;
 import com.restowa.domain.model.Address;
 import com.restowa.domain.model.TypeEnum;
 import com.restowa.domain.model.UserAccount;
+import com.restowa.utils.TokenManagement;
 import javax.annotation.Resource;
+import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.core.MediaType;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -55,21 +59,23 @@ public class UserService {
      * HttpStatus.404 si mauvais etc
      */
     @RequestMapping(value = "/loginVerify", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON)
-    public JSONObject verifyLogin(@RequestBody String obj) throws ParseException { 
-        
+    public String verifyLogin(@RequestBody String obj, @RequestHeader HttpHeaders headers) throws ParseException { 
+        String stringToken = headers.get("authentificationToken").get(0);
+        //if (!TokenManagement.verifyToken(headers.get("authentificationToken").get(0))) {
+       //       throws new NotAuthorizedException("Invalid token");
+       // }
         JSONParser parser = new JSONParser(); 
         JSONObject json = (JSONObject) parser.parse(obj);
-        String email = (String) json.get("email");
-        String password = (String) json.get("password");
-        boolean result = true;// = CheckLogin(email,password); //utiliser la classe de lucie pour verifier ;
-         
+        UserAccount ua = uamanager.getUserAccountByEmail((String)json.get("email")).get(0);
+        //ça marche car ya pas de user account
         JSONObject resultLogin = new JSONObject();
-        resultLogin.put("login", result);
-        
-        //JWToken pour gere les token et voir si cest toujours le meme utilisateur qui se connecte
-            
-        
-        return resultLogin;   //retourner un string en fonction du résultat de la classe de lucie 
+        if (ua.getPassword().equals((String)json.get("password"))){
+            resultLogin.put("login", true); 
+        } else {
+            resultLogin.put("login", false);
+        }
+       //deplacer la verif de token dans get user info
+        return stringToken;   //retourner un string en fonction du résultat de la classe de lucie 
                         //HttpStatus.BAD_REQUEST;
     }
 

@@ -38,18 +38,15 @@ public class UserAccount implements Serializable {
     @Column(name = "active")
     private boolean active;
     
-    @Temporal(TemporalType.DATE)
     @Column(name = "creationdate")
     private LocalDateTime creationDate;
     
-    @Temporal(TemporalType.DATE)
     @Column(name = "lastmodificationdate")
     private LocalDateTime lastModificationDate;
     
     @Column(name = "resetpasswordlink")
     private String resetPasswordLink;
     
-    @Temporal(TemporalType.DATE)
     @Column(name = "restelinkvalidatedate")
     private LocalDateTime resetLinkValidateDate; 
     
