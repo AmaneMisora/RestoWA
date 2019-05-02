@@ -6,12 +6,14 @@
 package com.restowa.service;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.restowa.bl.concrete.UserAccountManager;
 import com.restowa.domain.model.Address;
 import com.restowa.domain.model.TypeEnum;
 import com.restowa.domain.model.UserAccount;
 import com.restowa.utils.TokenManagement;
+import java.util.List;
 import javax.annotation.Resource;
 import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.core.MediaType;
@@ -53,50 +55,60 @@ public class UserService {
     }
     
 
-    /* utiliser postam pour tester le login
-     * obj est un string de la forme d'un json
-     * HttpStatus.OK; renvoie si bon
-     * HttpStatus.404 si mauvais etc
+    /* obj est un string de la forme d'un json
      */
     @RequestMapping(value = "/loginVerify", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON)
-    public String verifyLogin(@RequestBody String obj, @RequestHeader HttpHeaders headers) throws ParseException { 
-        String stringToken = headers.get("authentificationToken").get(0);
-        //if (!TokenManagement.verifyToken(headers.get("authentificationToken").get(0))) {
-       //       throws new NotAuthorizedException("Invalid token");
-       // }
+    public JSONObject verifyLogin(@RequestBody String obj) throws ParseException { 
+        
         JSONParser parser = new JSONParser(); 
         JSONObject json = (JSONObject) parser.parse(obj);
-        UserAccount ua = uamanager.getUserAccountByEmail((String)json.get("email")).get(0);
-        //ça marche car ya pas de user account
+        List<UserAccount> userList = uamanager.getUserAccountByEmail((String)json.get("email"));
         JSONObject resultLogin = new JSONObject();
-        if (ua.getPassword().equals((String)json.get("password"))){
-            resultLogin.put("login", true); 
-        } else {
+        if (userList.isEmpty()){
             resultLogin.put("login", false);
+        }else {
+            if (userList.get(0).getPassword().equals((String)json.get("password"))){
+                resultLogin.put("login", true); 
+                String stringToken = TokenManagement.generateToken(userList.get(0).getId());
+                //encripter le string
+                String stringEncrypToken = stringToken;
+                userList.get(0).setToken(stringEncrypToken);
+                uamanager.saveUserAccount(userList.get(0));
+            } else {
+                resultLogin.put("login", false);
+            }
         }
-       //deplacer la verif de token dans get user info
-        return stringToken;   //retourner un string en fonction du résultat de la classe de lucie 
-                        //HttpStatus.BAD_REQUEST;
+    
+        return resultLogin;   
     }
 
-    /* a besoin d'un json avec l'id de l'utilisateur et un JWToken dans le header
-     * verifie si le token est bon et si il est bon va chercher l'utilisateur avec la fonction de lucie getuserbyid
+    /* a besoin d'un json avec l'email de l'utilisateur et un token dans le header
+     * verifie si le token est bon et si il est bon va chercher l'utilisateur avec la fonction getuserbyemail
      * puis met toutes les info de l'utilisateur dans un json que l'on renvoie
      */
-    //@JWTTokenNeeded
     @RequestMapping(value = "/getUserInfo", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON)
-    public JSONObject getUserInfo(@RequestBody int userId){ 
-    
- 
-        //UserAccount user = UserAccountDAO.getUserById(userId);
+    public JSONObject getUserInfo(@RequestBody String email, @RequestHeader HttpHeaders headers) throws JsonProcessingException, ParseException{ 
+        JSONObject result = new JSONObject();
+        if (!TokenManagement.verifyToken(headers.get("authentificationToken").get(0))) {
+            result.put("result", "invalid token");
+        } else {
+            
+            List<UserAccount> userList = uamanager.getUserAccountByEmail(email);
+            if (userList.isEmpty()){
+                result.put("result", "no user with this email");
+            } else{
+                ObjectMapper mapper = new ObjectMapper();
+                String userInfo = mapper.writeValueAsString(userList.get(0));
+                result.put("test", "hf");
+                //JSONParser parser = new JSONParser(); 
+                //result = (JSONObject) parser.parse(userInfo);
+                
+            //pas sur que le mapper marche quand on enregistre dans json object
+            //si ça marche pas enregistrer dans un string puis le transformer en jsonobject avec un parser
+            }  
+        }
         
-        ObjectMapper mapper = new ObjectMapper();
-        
-        JSONObject userInfo = new JSONObject();
-        //JSONObject userInfo = mapper.writeValueAsString(user);
-        //pas sur que le mapper marche quand on enregistre dans json object
-        //si ça marche pas enregistrer dans un string puis le transformer en jsonobject avec un parser
-        return userInfo;
+        return result;
     }
     
 }

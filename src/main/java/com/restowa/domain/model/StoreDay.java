@@ -5,6 +5,7 @@
  */
 package com.restowa.domain.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.validation.constraints.NotEmpty;
@@ -13,7 +14,7 @@ import javax.validation.constraints.NotEmpty;
  *
  * @author Amane
  */
-public class StoreDay {
+public class StoreDay implements Serializable{
     
     @NotEmpty
     @Column(name = "openinghoursun")

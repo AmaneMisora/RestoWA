@@ -47,17 +47,16 @@ public class Store implements Serializable {
     private double lattitude;
     
     @NotEmpty
-    @Column(name = "logitude")
-    private double logitude;
+    @Column(name = "longitude")
+    private double longitude;
     
     @NotEmpty
-    @Temporal(TemporalType.DATE)
     @Column(name = "lastmodificationdate")
     private LocalDateTime lastModificationDate;
     
     @ManyToOne
-    @Column(name = "lastmodifiedby")
-    public int lastModifiedBy;
+    @JoinColumn(name = "useraccount_id")
+    public UserAccount lastModifiedBy;
     
     @Embedded
     private Address address;
@@ -118,12 +117,12 @@ public class Store implements Serializable {
         this.lattitude = lattitude;
     }
 
-    public double getLogitude() {
-        return logitude;
+    public double getLongitude() {
+        return longitude;
     }
 
-    public void setLogitude(double logitude) {
-        this.logitude = logitude;
+    public void setLogitude(double longitude) {
+        this.longitude = longitude;
     }
 
     public LocalDateTime getLastModificationDate() {
@@ -134,11 +133,11 @@ public class Store implements Serializable {
         this.lastModificationDate = lastModificationDate;
     }
 
-    public int getLastModifiedBy() {
+    public UserAccount getLastModifiedBy() {
         return lastModifiedBy;
     }
 
-    public void setLastModifiedBy(int lastModifiedBy) {
+    public void setLastModifiedBy(UserAccount lastModifiedBy) {
         this.lastModifiedBy = lastModifiedBy;
     }
 

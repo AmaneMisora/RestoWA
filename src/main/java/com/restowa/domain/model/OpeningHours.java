@@ -44,175 +44,62 @@ public class OpeningHours {
     @NotEmpty
     @Column(name = "satursay")
     private StoreDay satursay;
+
+    public StoreDay getSunday() {
+        return sunday;
+    }
+
+    public void setSunday(StoreDay sunday) {
+        this.sunday = sunday;
+    }
+
+    public StoreDay getMonday() {
+        return monday;
+    }
+
+    public void setMonday(StoreDay monday) {
+        this.monday = monday;
+    }
+
+    public StoreDay getTuesday() {
+        return tuesday;
+    }
+
+    public void setTuesday(StoreDay tuesday) {
+        this.tuesday = tuesday;
+    }
+
+    public StoreDay getWednesday() {
+        return wednesday;
+    }
+
+    public void setWednesday(StoreDay wednesday) {
+        this.wednesday = wednesday;
+    }
+
+    public StoreDay getThursday() {
+        return thursday;
+    }
+
+    public void setThursday(StoreDay thursday) {
+        this.thursday = thursday;
+    }
+
+    public StoreDay getFriday() {
+        return friday;
+    }
+
+    public void setFriday(StoreDay friday) {
+        this.friday = friday;
+    }
+
+    public StoreDay getSatursay() {
+        return satursay;
+    }
+
+    public void setSatursay(StoreDay satursay) {
+        this.satursay = satursay;
+    }
             
-            /*
-    @NotEmpty
-    @Column(name = "openinghoursun")
-    private LocalDateTime openingHourSun;
-    
-    @NotEmpty
-    @Column(name = "closinghoursun")
-    private LocalDateTime closingHourSun;
-    
-    @NotEmpty
-    @Column(name = "openinghourmon")
-    private LocalDateTime openingHourMon;
-    
-    @NotEmpty
-    @Column(name = "closinghourmon")
-    private LocalDateTime closingHourMon;
-    
-    @NotEmpty
-    @Column(name = "openinghourtues")
-    private LocalDateTime openingHourTues;
-    
-    @NotEmpty
-    @Column(name = "closinghourtues")
-    private LocalDateTime closingHourTues;
-    
-    @NotEmpty
-    @Column(name = "openinghourwed")
-    private LocalDateTime openingHourWed;
-    
-    @NotEmpty
-    @Column(name = "closinghourwed")
-    private LocalDateTime closingHourWed;
-    
-    @NotEmpty
-    @Column(name = "openinghourthu")
-    private LocalDateTime openingHourThu;
-    
-    @NotEmpty
-    @Column(name = "closinghourthu")
-    private LocalDateTime closingHourThu;
-    
-    @NotEmpty
-    @Column(name = "openinghourfri")
-    private LocalDateTime openingHourFri;
-    
-    @NotEmpty
-    @Column(name = "closinghourfri")
-    private LocalDateTime closingHourFri;
-    
-    @NotEmpty
-    @Column(name = "openinghoursat")
-    private LocalDateTime openingHourSat;
-    
-    @NotEmpty
-    @Column(name = "closinghoursat")
-    private LocalDateTime closingHourSat;
-
-    public LocalDateTime getOpeningHourSun() {
-        return openingHourSun;
-    }
-
-    public void setOpeningHourSun(LocalDateTime openingHourSun) {
-        this.openingHourSun = openingHourSun;
-    }
-
-    public LocalDateTime getClosingHourSun() {
-        return closingHourSun;
-    }
-
-    public void setClosingHourSun(LocalDateTime closingHourSun) {
-        this.closingHourSun = closingHourSun;
-    }
-
-    public LocalDateTime getOpeningHourMon() {
-        return openingHourMon;
-    }
-
-    public void setOpeningHourMon(LocalDateTime openingHourMon) {
-        this.openingHourMon = openingHourMon;
-    }
-
-    public LocalDateTime getClosingHourMon() {
-        return closingHourMon;
-    }
-
-    public void setClosingHourMon(LocalDateTime closingHourMon) {
-        this.closingHourMon = closingHourMon;
-    }
-
-    public LocalDateTime getOpeningHourTues() {
-        return openingHourTues;
-    }
-
-    public void setOpeningHourTues(LocalDateTime openingHourTues) {
-        this.openingHourTues = openingHourTues;
-    }
-
-    public LocalDateTime getClosingHourTues() {
-        return closingHourTues;
-    }
-
-    public void setClosingHourTues(LocalDateTime closingHourTues) {
-        this.closingHourTues = closingHourTues;
-    }
-
-    public LocalDateTime getOpeningHourWed() {
-        return openingHourWed;
-    }
-
-    public void setOpeningHourWed(LocalDateTime openingHourWed) {
-        this.openingHourWed = openingHourWed;
-    }
-
-    public LocalDateTime getClosingHourWed() {
-        return closingHourWed;
-    }
-
-    public void setClosingHourWed(LocalDateTime closingHourWed) {
-        this.closingHourWed = closingHourWed;
-    }
-
-    public LocalDateTime getOpeningHourThu() {
-        return openingHourThu;
-    }
-
-    public void setOpeningHourThu(LocalDateTime openingHourThu) {
-        this.openingHourThu = openingHourThu;
-    }
-
-    public LocalDateTime getClosingHourThu() {
-        return closingHourThu;
-    }
-
-    public void setClosingHourThu(LocalDateTime closingHourThu) {
-        this.closingHourThu = closingHourThu;
-    }
-
-    public LocalDateTime getOpeningHourFri() {
-        return openingHourFri;
-    }
-
-    public void setOpeningHourFri(LocalDateTime openingHourFri) {
-        this.openingHourFri = openingHourFri;
-    }
-
-    public LocalDateTime getClosingHourFri() {
-        return closingHourFri;
-    }
-
-    public void setClosingHourFri(LocalDateTime closingHourFri) {
-        this.closingHourFri = closingHourFri;
-    }
-
-    public LocalDateTime getOpeningHourSat() {
-        return openingHourSat;
-    }
-
-    public void setOpeningHourSat(LocalDateTime openingHourSat) {
-        this.openingHourSat = openingHourSat;
-    }
-
-    public LocalDateTime getClosingHourSat() {
-        return closingHourSat;
-    }
-
-    public void setClosingHourSat(LocalDateTime closingHourSat) {
-        this.closingHourSat = closingHourSat;
-    }
-    
-    */
+   
 }

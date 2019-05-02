@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import javax.validation.constraints.Email;
 
@@ -60,14 +61,14 @@ public class UserAccount implements Serializable {
     @Embedded
     private Address address;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
+    @OneToMany(mappedBy = "lastModifiedBy", fetch = FetchType.EAGER)
     private List<Store> stores;
     
     @Column(name = "token")
     private String token;
     
     public UserAccount() {
-        
+        this.stores = new ArrayList<>();
     }
     
     public UserAccount(String firstname,String lastname,String email,String password,String phoneNumber,TypeEnum type,Address address) {
@@ -77,6 +78,7 @@ public class UserAccount implements Serializable {
         this.phoneNumber = phoneNumber;
         this.type = type;
         this.address = address;
+        this.stores = new ArrayList<>();
     }
     
     public int getId() {
