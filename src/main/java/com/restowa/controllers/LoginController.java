@@ -5,9 +5,11 @@
  */
 package com.restowa.controllers;
 
+import com.restowa.bl.concrete.UserAccountManager;
 import com.restowa.domain.model.UserAccount;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.Resource;
 import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

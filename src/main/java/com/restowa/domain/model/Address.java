@@ -30,6 +30,7 @@ public class Address {
     @Column(name = "state")
     private String state;
     
+    @NotNull
     @Column(name = "zipcode")
     private int zipCode;
     

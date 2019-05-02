@@ -61,7 +61,7 @@ public class UserAccount implements Serializable {
     @Embedded
     private Address address;
     
-    @OneToMany(mappedBy = "lastModifiedBy", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "lastModifiedBy")
     private List<Store> stores;
     
     @Column(name = "token")

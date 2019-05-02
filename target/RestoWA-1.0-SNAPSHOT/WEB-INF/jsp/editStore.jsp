@@ -9,13 +9,13 @@
         <link rel='stylesheet' href='${cp}/webjars/bootstrap/4.3.1/css/bootstrap.min.css'>
         <script src='${cp}/webjars/jquery/3.3.1/jquery.min.js'></script>
         <script src='${cp}/webjars/bootstrap/4.3.1/js/bootstrap.min.js'></script>
-        <title>Connection</title>
+        <title>Magasin</title>
     </head>
     <body>
         <%@include file="jspf/loggedHeader.jspf" %>
-        <div class="col-sm-6 offset-sm-3 mt-5">
+        <div class="col-sm-8 offset-sm-2 mt-5">
             <h1 class="display-4">Ajouter un magasin</h1>
-            <form:form method="POST" modelAttribute="store" action="${cp}/addStore">
+            <form:form method="POST" modelAttribute="store" action="${cp}/editStore">
                 <div class="form-group">
                     <label for="nameInput">Nom</label>
                     <form:input path="name" class="form-control" id="nameInput" aria-describedby="nameInput" placeholder="Nom" />
@@ -41,62 +41,60 @@
                     <form:input path="longitude" type="number" class="form-control" id="longitudeInput" aria-describedby="longitudeInput" placeholder="000,000" />
                     <small id="longitudeInput" class="form-text text-danger font-weight-bold"><form:errors path="longitude" /></small>
                 </div>
-                <form:form modelAttribute="schedule">
-                    <!--
-                    <form:checkbox path="monday24h" />
-                    <form:errors path="monday24h" />
-                    <form:input path="mondayStart" type="time" value="${schedule.mondayStart.hour}:${schedule.mondayStart.minute}" />
-                    -->
+                <form:form modelAttribute="openingHours">
                     <table class="table">
-                        <caption>List of users</caption>
                         <thead>
-                                <tr>
-                                    <th scope="col">Heures d'ouverture</th>
-                                    <th scope="col">Sun.</th>
-                                    <th scope="col">Mon.</th>
-                                    <th scope="col">Tued</th>
-                                </tr>
-                            </thead>
+                            <tr>
+                                <th scope="col">Heures d'ouverture</th>
+                                <td scope="col">Lundi</td>
+                                <td scope="col">Mardi</td>
+                                <td scope="col">Mercredi</td>
+                                <td scope="col">Jeudi</td>
+                                <td scope="col">Vendredi</td>
+                                <td scope="col">Samedi</td>
+                                <td scope="col">Dimanche</td>
+                            </tr>
+                        </thead>
                         <tbody>
                             <tr>
-                                <th scope="row">De</th>
-                                <td><form:input path="mondayStart" type="time" value="${schedule.mondayStart.hour}:${schedule.mondayStart.minute}" /></td>
-                                <td><form:input path="mondayStart" type="time" value="${schedule.mondayStart.hour}:${schedule.mondayStart.minute}" /></td>
-                                <td><form:input path="mondayStart" type="time" value="${schedule.mondayStart.hour}:${schedule.mondayStart.minute}" /></td>
-                                <td><form:input path="mondayStart" type="time" value="${schedule.mondayStart.hour}:${schedule.mondayStart.minute}" /></td>
-                                <td><form:input path="mondayStart" type="time" value="${schedule.mondayStart.hour}:${schedule.mondayStart.minute}" /></td>
-                                <td><form:input path="mondayStart" type="time" value="${schedule.mondayStart.hour}:${schedule.mondayStart.minute}" /></td>
-                                <td><form:input path="mondayStart" type="time" value="${schedule.mondayStart.hour}:${schedule.mondayStart.minute}" /></td>
+                                <td scope="row">De</td>
+                                <td><form:input path="mondayOpeningHour" type="time" value="${openingHours.sundayOpeningHour}" /></td>
+                                <td><form:input path="tuesdayOpeningHour" type="time" value="${openingHours.sundayOpeningHour}" /></td>
+                                <td><form:input path="wednesdayOpeningHour" type="time" value="${openingHours.sundayOpeningHour}" /></td>
+                                <td><form:input path="thursdayOpeningHour" type="time" value="${openingHours.sundayOpeningHour}" /></td>
+                                <td><form:input path="fridayOpeningHour" type="time" value="${openingHours.sundayOpeningHour}" /></td>
+                                <td><form:input path="saturdayOpeningHour" type="time" value="${openingHours.sundayOpeningHour}" /></td>
+                                <td><form:input path="sundayOpeningHour" type="time" value="${openingHours.sundayOpeningHour}" /></td>
                             </tr>
                             <tr>
-                                <th scope="row">à</th>
-                                <td><form:input path="mondayStart" type="time" value="${schedule.mondayStart.hour}:${schedule.mondayStart.minute}" /></td>
-                                <td><form:input path="mondayStart" type="time" value="${schedule.mondayStart.hour}:${schedule.mondayStart.minute}" /></td>
-                                <td><form:input path="mondayStart" type="time" value="${schedule.mondayStart.hour}:${schedule.mondayStart.minute}" /></td>
-                                <td><form:input path="mondayStart" type="time" value="${schedule.mondayStart.hour}:${schedule.mondayStart.minute}" /></td>
-                                <td><form:input path="mondayStart" type="time" value="${schedule.mondayStart.hour}:${schedule.mondayStart.minute}" /></td>
-                                <td><form:input path="mondayStart" type="time" value="${schedule.mondayStart.hour}:${schedule.mondayStart.minute}" /></td>
-                                <td><form:input path="mondayStart" type="time" value="${schedule.mondayStart.hour}:${schedule.mondayStart.minute}" /></td>
+                                <td scope="row">à</td>
+                                <td><form:input path="mondayClosingHour" type="time" value="${openingHours.sundayClosingHour}" /></td>
+                                <td><form:input path="tuesdayClosingHour" type="time" value="${openingHours.sundayClosingHour}" /></td>
+                                <td><form:input path="wednesdayClosingHour" type="time" value="${openingHours.sundayClosingHour}" /></td>
+                                <td><form:input path="thursdayClosingHour" type="time" value="${openingHours.sundayClosingHour}" /></td>
+                                <td><form:input path="fridayClosingHour" type="time" value="${openingHours.sundayClosingHour}" /></td>
+                                <td><form:input path="saturdayClosingHour" type="time" value="${openingHours.sundayClosingHour}" /></td>
+                                <td><form:input path="sundayClosingHour" type="time" value="${openingHours.sundayClosingHour}" /></td>
                             </tr>
                             <tr>
-                                <th scope="row">Fermé</th>
-                                <td><form:checkbox path="monday24h" /></td>
-                                <td><form:checkbox path="monday24h" /></td>
-                                <td><form:checkbox path="monday24h" /></td>
-                                <td><form:checkbox path="monday24h" /></td>
-                                <td><form:checkbox path="monday24h" /></td>
-                                <td><form:checkbox path="monday24h" /></td>
-                                <td><form:checkbox path="monday24h" /></td>
+                                <td scope="row">Fermé</td>
+                                <td><form:checkbox path="mondayClosed" /></td>
+                                <td><form:checkbox path="tuesdayClosed" /></td>
+                                <td><form:checkbox path="wednesdayClosed" /></td>
+                                <td><form:checkbox path="thursdayClosed" /></td>
+                                <td><form:checkbox path="fridayClosed" /></td>
+                                <td><form:checkbox path="saturdayClosed" /></td>
+                                <td><form:checkbox path="sundayClosed" /></td>
                             </tr>
                             <tr>
-                                <th scope="row">24 heures</th>
-                                <td><form:checkbox path="monday24h" /></td>
-                                <td><form:checkbox path="monday24h" /></td>
-                                <td><form:checkbox path="monday24h" /></td>
-                                <td><form:checkbox path="monday24h" /></td>
-                                <td><form:checkbox path="monday24h" /></td>
-                                <td><form:checkbox path="monday24h" /></td>
-                                <td><form:checkbox path="monday24h" /></td>
+                                <td scope="row">24 heures</td>
+                                <td><form:checkbox path="mondayAllDay" /></td>
+                                <td><form:checkbox path="tuesdayAllDay" /></td>
+                                <td><form:checkbox path="wednesdayAllDay" /></td>
+                                <td><form:checkbox path="thursdayAllDay" /></td>
+                                <td><form:checkbox path="fridayAllDay" /></td>
+                                <td><form:checkbox path="saturdayAllDay" /></td>
+                                <td><form:checkbox path="sundayAllDay" /></td>
                             </tr>
                         </tbody>
                     </table>

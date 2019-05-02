@@ -80,7 +80,8 @@ public class UserAccountDAO {
      * @param password
      * @return true si le compte existe et le password correcpond
      */
-    public static boolean checkLogin(String email, String password)
+    /*
+    public static boolean checkLoginExist(String email, String password)
     {
         List<UserAccount> userToCheck;
         EntityManager em = MainDAO.getEntityManager();
@@ -96,6 +97,7 @@ public class UserAccountDAO {
                 
 	return false;	
     }
+    */
     
     public static List<UserAccount> getUserAccountByEmail(String email) {
         EntityManager em = MainDAO.getEntityManager();

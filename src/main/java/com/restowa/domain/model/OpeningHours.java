@@ -5,101 +5,331 @@
  */
 package com.restowa.domain.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 /**
  *
  * @author Amane
  */
 @Embeddable
-public class OpeningHours {
+public class OpeningHours implements Serializable {
     
-    @NotEmpty
-    @Column(name = "sunday")
-    private StoreDay sunday;
+    @Column(name = "mondayopeninghour")
+    private LocalTime mondayOpeningHour;
     
-    @NotEmpty
-    @Column(name = "monday")
-    private StoreDay monday;
+    @Column(name = "mondayClosinghour")
+    private LocalTime mondayClosingHour;
     
-    @NotEmpty
-    @Column(name = "tuesday")
-    private StoreDay tuesday;
+    @Column(name = "mondayClosed")
+    private boolean mondayClosed;
     
-    @NotEmpty
-    @Column(name = "wednesday")
-    private StoreDay wednesday;
+    @Column(name = "mondayallday")
+    private boolean mondayAllDay;
     
-    @NotEmpty
-    @Column(name = "thursday")
-    private StoreDay thursday;
+    @Column(name = "tuesdayopeninghour")
+    private LocalTime tuesdayOpeningHour;
     
-    @NotEmpty
-    @Column(name = "friday")
-    private StoreDay friday;
+    @Column(name = "tuesdayClosinghour")
+    private LocalTime tuesdayClosingHour;
     
-    @NotEmpty
-    @Column(name = "satursay")
-    private StoreDay satursay;
-
-    public StoreDay getSunday() {
-        return sunday;
+    @Column(name = "tuesdayClosed")
+    private boolean tuesdayClosed;
+    
+    @Column(name = "tuesdayallday")
+    private boolean tuesdayAllDay;
+    
+    @Column(name = "wednesdayopeninghour")
+    private LocalTime wednesdayOpeningHour;
+    
+    @Column(name = "wednesdayClosinghour")
+    private LocalTime wednesdayClosingHour;
+    
+    @Column(name = "wednesdayClosed")
+    private boolean wednesdayClosed;
+    
+    @Column(name = "wednesdayallday")
+    private boolean wednesdayAllDay;
+    
+    @Column(name = "thursdayopeninghour")
+    private LocalTime thursdayOpeningHour;
+    
+    @Column(name = "thursdayClosinghour")
+    private LocalTime thursdayClosingHour;
+    
+    @Column(name = "thursdayClosed")
+    private boolean thursdayClosed;
+    
+    @Column(name = "thursdayallday")
+    private boolean thursdayAllDay;
+    
+    @Column(name = "fridayopeninghour") 
+    private LocalTime fridayOpeningHour;
+    
+    @Column(name = "fridayClosinghour")
+    private LocalTime fridayClosingHour;
+    
+    @Column(name = "fridayClosed")
+    private boolean fridayClosed;
+    
+    @Column(name = "fridayallday")
+    private boolean fridayAllDay;
+    
+    @Column(name = "saturdayopeninghour")
+    private LocalTime saturdayOpeningHour;
+    
+    @Column(name = "saturdayClosinghour")
+    private LocalTime saturdayClosingHour;
+    
+    @Column(name = "saturdayClosed")
+    private boolean saturdayClosed;
+    
+    @Column(name = "saturdayallday")
+    private boolean saturdayAllDay;
+    
+    @Column(name = "sundayopeninghour")
+    private LocalTime sundayOpeningHour;
+    
+    @Column(name = "sundayClosinghour")
+    private LocalTime sundayClosingHour;
+    
+    @Column(name = "sundayClosed")
+    private boolean sundayClosed;
+    
+    @Column(name = "sundayallday")
+    private boolean sundayAllDay;
+    
+    public OpeningHours() {
+        
     }
 
-    public void setSunday(StoreDay sunday) {
-        this.sunday = sunday;
+    public LocalTime getMondayOpeningHour() {
+        return mondayOpeningHour;
     }
 
-    public StoreDay getMonday() {
-        return monday;
+    public void setMondayOpeningHour(LocalTime mondayOpeningHour) {
+        this.mondayOpeningHour = mondayOpeningHour;
     }
 
-    public void setMonday(StoreDay monday) {
-        this.monday = monday;
+    public LocalTime getMondayClosingHour() {
+        return mondayClosingHour;
     }
 
-    public StoreDay getTuesday() {
-        return tuesday;
+    public void setMondayClosingHour(LocalTime mondayClosingHour) {
+        this.mondayClosingHour = mondayClosingHour;
     }
 
-    public void setTuesday(StoreDay tuesday) {
-        this.tuesday = tuesday;
+    public boolean isMondayClosed() {
+        return mondayClosed;
     }
 
-    public StoreDay getWednesday() {
-        return wednesday;
+    public void setMondayClosed(boolean mondayClosed) {
+        this.mondayClosed = mondayClosed;
     }
 
-    public void setWednesday(StoreDay wednesday) {
-        this.wednesday = wednesday;
+    public boolean isMondayAllDay() {
+        return mondayAllDay;
     }
 
-    public StoreDay getThursday() {
-        return thursday;
+    public void setMondayAllDay(boolean mondayAllDay) {
+        this.mondayAllDay = mondayAllDay;
     }
 
-    public void setThursday(StoreDay thursday) {
-        this.thursday = thursday;
+    public LocalTime getTuesdayOpeningHour() {
+        return tuesdayOpeningHour;
     }
 
-    public StoreDay getFriday() {
-        return friday;
+    public void setTuesdayOpeningHour(LocalTime tuesdayOpeningHour) {
+        this.tuesdayOpeningHour = tuesdayOpeningHour;
     }
 
-    public void setFriday(StoreDay friday) {
-        this.friday = friday;
+    public LocalTime getTuesdayClosingHour() {
+        return tuesdayClosingHour;
     }
 
-    public StoreDay getSatursay() {
-        return satursay;
+    public void setTuesdayClosingHour(LocalTime tuesdayClosingHour) {
+        this.tuesdayClosingHour = tuesdayClosingHour;
     }
 
-    public void setSatursay(StoreDay satursay) {
-        this.satursay = satursay;
+    public boolean isTuesdayClosed() {
+        return tuesdayClosed;
     }
-            
-   
+
+    public void setTuesdayClosed(boolean tuesdayClosed) {
+        this.tuesdayClosed = tuesdayClosed;
+    }
+
+    public boolean isTuesdayAllDay() {
+        return tuesdayAllDay;
+    }
+
+    public void setTuesdayAllDay(boolean tuesdayAllDay) {
+        this.tuesdayAllDay = tuesdayAllDay;
+    }
+
+    public LocalTime getWednesdayOpeningHour() {
+        return wednesdayOpeningHour;
+    }
+
+    public void setWednesdayOpeningHour(LocalTime wednesdayOpeningHour) {
+        this.wednesdayOpeningHour = wednesdayOpeningHour;
+    }
+
+    public LocalTime getWednesdayClosingHour() {
+        return wednesdayClosingHour;
+    }
+
+    public void setWednesdayClosingHour(LocalTime wednesdayClosingHour) {
+        this.wednesdayClosingHour = wednesdayClosingHour;
+    }
+
+    public boolean isWednesdayClosed() {
+        return wednesdayClosed;
+    }
+
+    public void setWednesdayClosed(boolean wednesdayClosed) {
+        this.wednesdayClosed = wednesdayClosed;
+    }
+
+    public boolean isWednesdayAllDay() {
+        return wednesdayAllDay;
+    }
+
+    public void setWednesdayAllDay(boolean wednesdayAllDay) {
+        this.wednesdayAllDay = wednesdayAllDay;
+    }
+
+    public LocalTime getThursdayOpeningHour() {
+        return thursdayOpeningHour;
+    }
+
+    public void setThursdayOpeningHour(LocalTime thursdayOpeningHour) {
+        this.thursdayOpeningHour = thursdayOpeningHour;
+    }
+
+    public LocalTime getThursdayClosingHour() {
+        return thursdayClosingHour;
+    }
+
+    public void setThursdayClosingHour(LocalTime thursdayClosingHour) {
+        this.thursdayClosingHour = thursdayClosingHour;
+    }
+
+    public boolean isThursdayClosed() {
+        return thursdayClosed;
+    }
+
+    public void setThursdayClosed(boolean thursdayClosed) {
+        this.thursdayClosed = thursdayClosed;
+    }
+
+    public boolean isThursdayAllDay() {
+        return thursdayAllDay;
+    }
+
+    public void setThursdayAllDay(boolean thursdayAllDay) {
+        this.thursdayAllDay = thursdayAllDay;
+    }
+
+    public LocalTime getFridayOpeningHour() {
+        return fridayOpeningHour;
+    }
+
+    public void setFridayOpeningHour(LocalTime fridayOpeningHour) {
+        this.fridayOpeningHour = fridayOpeningHour;
+    }
+
+    public LocalTime getFridayClosingHour() {
+        return fridayClosingHour;
+    }
+
+    public void setFridayClosingHour(LocalTime fridayClosingHour) {
+        this.fridayClosingHour = fridayClosingHour;
+    }
+
+    public boolean isFridayClosed() {
+        return fridayClosed;
+    }
+
+    public void setFridayClosed(boolean fridayClosed) {
+        this.fridayClosed = fridayClosed;
+    }
+
+    public boolean isFridayAllDay() {
+        return fridayAllDay;
+    }
+
+    public void setFridayAllDay(boolean fridayAllDay) {
+        this.fridayAllDay = fridayAllDay;
+    }
+
+    public LocalTime getSaturdayOpeningHour() {
+        return saturdayOpeningHour;
+    }
+
+    public void setSaturdayOpeningHour(LocalTime saturdayOpeningHour) {
+        this.saturdayOpeningHour = saturdayOpeningHour;
+    }
+
+    public LocalTime getSaturdayClosingHour() {
+        return saturdayClosingHour;
+    }
+
+    public void setSaturdayClosingHour(LocalTime saturdayClosingHour) {
+        this.saturdayClosingHour = saturdayClosingHour;
+    }
+
+    public boolean isSaturdayClosed() {
+        return saturdayClosed;
+    }
+
+    public void setSaturdayClosed(boolean saturdayClosed) {
+        this.saturdayClosed = saturdayClosed;
+    }
+
+    public boolean isSaturdayAllDay() {
+        return saturdayAllDay;
+    }
+
+    public void setSaturdayAllDay(boolean saturdayAllDay) {
+        this.saturdayAllDay = saturdayAllDay;
+    }
+
+    public LocalTime getSundayOpeningHour() {
+        return sundayOpeningHour;
+    }
+
+    public void setSundayOpeningHour(LocalTime sundayOpeningHour) {
+        this.sundayOpeningHour = sundayOpeningHour;
+    }
+
+    public LocalTime getSundayClosingHour() {
+        return sundayClosingHour;
+    }
+
+    public void setSundayClosingHour(LocalTime sundayClosingHour) {
+        this.sundayClosingHour = sundayClosingHour;
+    }
+
+    public boolean isSundayClosed() {
+        return sundayClosed;
+    }
+
+    public void setSundayClosed(boolean sundayClosed) {
+        this.sundayClosed = sundayClosed;
+    }
+
+    public boolean isSundayAllDay() {
+        return sundayAllDay;
+    }
+
+    public void setSundayAllDay(boolean sundayAllDay) {
+        this.sundayAllDay = sundayAllDay;
+    }
+    
 }
