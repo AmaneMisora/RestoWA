@@ -6,41 +6,58 @@
 package com.restowa.domain.model;
 
 import java.io.Serializable;
-import java.util.Date;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import java.time.LocalDateTime;
+import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 /**
  *
- * @author yanis
+ * @author Amane
  */
 @Entity
 public class Store implements Serializable {
-    
+
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    
-    private int key;
-    
+
+    @NotEmpty
+    @Column(name = "key")
+    private String key;
+
     @Embedded
-    private Schedule schedule;
+    private OpeningHours openingHours;
     
     @NotEmpty
+    @Column(name = "name")
     private String name;
     
+    @NotEmpty
+    @Column(name = "phonenumber")
     private String phoneNumber;
     
+    @NotEmpty
+    @Email
+    @Column(name = "email")
     private String email;
     
+    @NotEmpty
+    @Column(name = "lattitude")
     private double lattitude;
     
-    private double longitude;
+    @NotEmpty
+    @Column(name = "logitude")
+    private double logitude;
     
-    private Date LastModifiedDate;
+    @NotEmpty
+    @Temporal(TemporalType.DATE)
+    @Column(name = "lastmodificationdate")
+    private LocalDateTime lastModificationDate;
     
-    private Date LastModifiedBy;
+    @ManyToOne
+    @Column(name = "lastmodifiedby")
+    public int lastModifiedBy;
     
     @Embedded
     private Address address;
@@ -53,20 +70,20 @@ public class Store implements Serializable {
         this.id = id;
     }
 
-    public int getKey() {
+    public String getKey() {
         return key;
     }
 
-    public void setKey(int key) {
+    public void setKey(String key) {
         this.key = key;
     }
 
-    public Schedule getSchedule() {
-        return schedule;
+    public OpeningHours getOpeningHours() {
+        return openingHours;
     }
 
-    public void setSchedule(Schedule schedule) {
-        this.schedule = schedule;
+    public void setOpeningHours(OpeningHours openingHours) {
+        this.openingHours = openingHours;
     }
 
     public String getName() {
@@ -101,28 +118,28 @@ public class Store implements Serializable {
         this.lattitude = lattitude;
     }
 
-    public double getLongitude() {
-        return longitude;
+    public double getLogitude() {
+        return logitude;
     }
 
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
+    public void setLogitude(double logitude) {
+        this.logitude = logitude;
     }
 
-    public Date getLastModifiedDate() {
-        return LastModifiedDate;
+    public LocalDateTime getLastModificationDate() {
+        return lastModificationDate;
     }
 
-    public void setLastModifiedDate(Date LastModifiedDate) {
-        this.LastModifiedDate = LastModifiedDate;
+    public void setLastModificationDate(LocalDateTime lastModificationDate) {
+        this.lastModificationDate = lastModificationDate;
     }
 
-    public Date getLastModifiedBy() {
-        return LastModifiedBy;
+    public int getLastModifiedBy() {
+        return lastModifiedBy;
     }
 
-    public void setLastModifiedBy(Date LastModifiedBy) {
-        this.LastModifiedBy = LastModifiedBy;
+    public void setLastModifiedBy(int lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
     }
 
     public Address getAddress() {
@@ -132,5 +149,6 @@ public class Store implements Serializable {
     public void setAddress(Address address) {
         this.address = address;
     }
+    
     
 }

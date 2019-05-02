@@ -4,6 +4,7 @@ C:\Users\Paul\Documents\restoWA\src\main\java\com\restowa\controllers\Registrati
 C:\Users\Paul\Documents\restoWA\src\main\java\com\restowa\domain\model\TypeEnum.java
 C:\Users\Paul\Documents\restoWA\src\main\java\com\restowa\service\UserService.java
 C:\Users\Paul\Documents\restoWA\src\main\java\com\restowa\service\StoreService.java
+<<<<<<< HEAD
 C:\Users\Paul\Documents\restoWA\src\main\java\com\restowa\domain\model\Store.java
 C:\Users\Paul\Documents\restoWA\src\main\java\com\restowa\validators\UniqueEmailConstraint.java
 C:\Users\Paul\Documents\restoWA\src\main\java\com\restowa\domain\model\UserAccount.java
@@ -12,10 +13,19 @@ C:\Users\Paul\Documents\restoWA\src\main\java\com\restowa\domain\model\Login.jav
 C:\Users\Paul\Documents\restoWA\src\main\java\com\restowa\controllers\AddStoreController.java
 C:\Users\Paul\Documents\restoWA\src\main\java\com\restowa\DAO\MainDAO.java
 C:\Users\Paul\Documents\restoWA\src\main\java\com\restowa\domain\model\Schedule.java
+=======
+C:\Users\Paul\Documents\restoWA\src\main\java\com\restowa\domain\model\UserAccount.java
+C:\Users\Paul\Documents\restoWA\src\main\java\com\restowa\config\AppConfig.java
+C:\Users\Paul\Documents\restoWA\src\main\java\com\restowa\domain\model\Login.java
+C:\Users\Paul\Documents\restoWA\src\main\java\com\restowa\DAO\MainDAO.java
+>>>>>>> master
 C:\Users\Paul\Documents\restoWA\src\main\java\com\restowa\bl\concrete\UserAccountManager.java
 C:\Users\Paul\Documents\restoWA\src\main\java\com\restowa\controllers\DefaultController.java
 C:\Users\Paul\Documents\restoWA\src\main\java\com\restowa\controllers\LoginController.java
 C:\Users\Paul\Documents\restoWA\src\main\java\com\restowa\config\WebInitializer.java
+<<<<<<< HEAD
 C:\Users\Paul\Documents\restoWA\src\main\java\com\restowa\validators\UniqueEmailValidator.java
+=======
+>>>>>>> master
 C:\Users\Paul\Documents\restoWA\src\main\java\com\restowa\domain\model\Address.java
 C:\Users\Paul\Documents\restoWA\src\main\java\com\restowa\utils\TokenManagement.java

@@ -60,8 +60,8 @@ public class UserAccount implements Serializable {
     @Embedded
     private Address address;
     
-   // @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
-    //private List<Store> stores;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
+    private List<Store> stores;
     
     @Column(name = "token")
     private String token;
@@ -191,13 +191,13 @@ public class UserAccount implements Serializable {
         this.address = address;
     }
 
-    //public List<Store> getStores() {
-    //    return stores;
-    //}
+    public List<Store> getStores() {
+        return stores;
+    }
 
-    //public void setStores(List<Store> stores) {
-    //    this.stores = stores;
-    //}
+    public void setStores(List<Store> stores) {
+        this.stores = stores;
+    }
 
     public String getToken() {
         return token;

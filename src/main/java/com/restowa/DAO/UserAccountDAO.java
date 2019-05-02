@@ -113,6 +113,13 @@ public class UserAccountDAO {
         return ua;
     }
     
+    public static List<UserAccount> getUserAccountById(int id) {
+        EntityManager em = MainDAO.getEntityManager();
+        Query query = em.createQuery("FROM UserAccount WHERE id = idToCheck").setParameter("idToCheck", id);
+        return query.getResultList();
+        
+    }
+    
     
     /*
      * Met à jour les parametres d'un UserAccount
