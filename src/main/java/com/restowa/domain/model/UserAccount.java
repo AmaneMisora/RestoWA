@@ -1,12 +1,10 @@
 package com.restowa.domain.model;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import com.restowa.validators.UniqueEmailConstraint;
+import java.time.LocalDateTime;
+import java.util.List;
 import javax.validation.constraints.Email;
 
 @Entity
@@ -42,18 +40,18 @@ public class UserAccount implements Serializable {
     
     @Temporal(TemporalType.DATE)
     @Column(name = "creationdate")
-    private Date creationDate;
+    private LocalDateTime creationDate;
     
     @Temporal(TemporalType.DATE)
     @Column(name = "lastmodificationdate")
-    private Date lastModificationDate;
+    private LocalDateTime lastModificationDate;
     
     @Column(name = "resetpasswordlink")
     private String resetPasswordLink;
     
     @Temporal(TemporalType.DATE)
     @Column(name = "restelinkvalidatedate")
-    private Date resetLinkValidateDate; 
+    private LocalDateTime resetLinkValidateDate; 
     
     @Column(name = "isremoved")
     private boolean isRemoved;
@@ -65,8 +63,23 @@ public class UserAccount implements Serializable {
     @Embedded
     private Address address;
     
+   // @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
+    //private List<Store> stores;
+    
+    @Column(name = "token")
+    private String token;
+    
     public UserAccount() {
         
+    }
+    
+    public UserAccount(String firstname,String lastname,String email,String password,String phoneNumber,TypeEnum type,Address address) {
+        this.firstName = firstname;
+        this.lastName = lastname;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.type = type;
+        this.address = address;
     }
     
     public int getId() {
@@ -125,19 +138,19 @@ public class UserAccount implements Serializable {
         this.active = active;
     }
 
-    public Date getCreationDate() {
+    public LocalDateTime getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
     }
 
-    public Date getLastModificationDate() {
+    public LocalDateTime getLastModificationDate() {
         return lastModificationDate;
     }
 
-    public void setLastModificationDate(Date lastModificationDate) {
+    public void setLastModificationDate(LocalDateTime lastModificationDate) {
         this.lastModificationDate = lastModificationDate;
     }
 
@@ -149,11 +162,11 @@ public class UserAccount implements Serializable {
         this.resetPasswordLink = resetPasswordLink;
     }
 
-    public Date getResetLinkValidateDate() {
+    public LocalDateTime getResetLinkValidateDate() {
         return resetLinkValidateDate;
     }
 
-    public void setResetLinkValidateDate(Date resetLinkValidateDate) {
+    public void setResetLinkValidateDate(LocalDateTime resetLinkValidateDate) {
         this.resetLinkValidateDate = resetLinkValidateDate;
     }
 
@@ -180,4 +193,21 @@ public class UserAccount implements Serializable {
     public void setAddress(Address address) {
         this.address = address;
     }
+
+    //public List<Store> getStores() {
+    //    return stores;
+    //}
+
+    //public void setStores(List<Store> stores) {
+    //    this.stores = stores;
+    //}
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+    
 }

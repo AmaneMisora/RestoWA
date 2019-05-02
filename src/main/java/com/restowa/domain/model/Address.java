@@ -42,6 +42,14 @@ public class Address {
         
     }
     
+    public Address(String Street,String City,String State,int ZipCode,String Country) {
+        this.street = Street;
+        this.city = City;
+        this.state = State;
+        this.zipCode = ZipCode;
+        this.country = Country;
+    }
+    
     public String getStreet() {
         return street;
     }

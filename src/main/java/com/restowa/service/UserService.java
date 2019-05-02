@@ -7,6 +7,11 @@ package com.restowa.service;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.restowa.bl.concrete.UserAccountManager;
+import com.restowa.domain.model.Address;
+import com.restowa.domain.model.TypeEnum;
+import com.restowa.domain.model.UserAccount;
+import javax.annotation.Resource;
 import javax.ws.rs.core.MediaType;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -24,8 +29,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/user")
 public class UserService {
     
-   // @Resource
-    //UserAccountManager uamanager;
+    @Resource
+    UserAccountManager uamanager;
     
     
     public UserService(){    
@@ -33,9 +38,14 @@ public class UserService {
     
     
     @RequestMapping(value = "/register", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON)
-    public void register(@RequestBody String obj) { 
-        
-        //je le creer et je le met dans la bdd ou je le renvoie ou les 2 ?
+    public String register(@RequestBody String obj) throws ParseException { 
+        JSONParser parser = new JSONParser(); 
+        JSONObject json = (JSONObject) parser.parse(obj);
+        Address address = new Address((String)json.get("Street"),(String)json.get("City"),(String)json.get("State"),(int)json.get("ZipCode"),(String)json.get("Country"));
+        UserAccount useraccount = new UserAccount((String)json.get("firstname"),(String)json.get("lastname"),(String)json.get("email"),(String)json.get("password"),(String)json.get("phoneNumber"),(TypeEnum)json.get("type"),address);
+        uamanager.saveUserAccount(useraccount);
+
+        return "user created";
     }
     
 

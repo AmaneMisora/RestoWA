@@ -10,6 +10,7 @@ import com.restowa.bl.concrete.UserAccountManager;
 import com.restowa.domain.model.Address;
 import com.restowa.domain.model.TypeEnum;
 import com.restowa.domain.model.UserAccount;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -60,7 +61,7 @@ public class RegistrationController {
             return "register";
         }
 
-        Date date = new Date();
+        LocalDateTime date = LocalDateTime.now();
         
         userAccount.setActive(true);
         userAccount.setAddress(address);
