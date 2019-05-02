@@ -9,6 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface UserAccountRepository extends JpaRepository<UserAccount, Integer> {
     
     List<UserAccount> getUserAccountByEmail(String email);
-    boolean checkLogin(String email, String password);
     
 }

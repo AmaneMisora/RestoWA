@@ -5,45 +5,52 @@
  */
 package com.restowa.domain.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 /**
  *
  * @author Amane
  */
-public class StoreDay {
+
+@Embeddable
+public class StoreDay implements Serializable{
     
-    @NotEmpty
-    @Column(name = "openinghoursun")
-    private LocalDateTime openingHour;
+    @Column(name = "openinghour")
+    private LocalTime openingHour;
     
-    @NotEmpty
-    @Column(name = "closinghoursun")
-    private LocalDateTime closingHour;
+    @Column(name = "closinghour")
+    private LocalTime closingHour;
     
-    @NotEmpty
     @Column(name = "closed")
     private boolean closed;
     
-    @NotEmpty
     @Column(name = "allday")
     private boolean allDay;
 
-    public LocalDateTime getOpeningHour() {
+    public StoreDay() {
+        
+    }
+    
+    public LocalTime getOpeningHour() {
         return openingHour;
     }
 
-    public void setOpeningHour(LocalDateTime openingHour) {
+    public void setOpeningHour(LocalTime openingHour) {
         this.openingHour = openingHour;
     }
 
-    public LocalDateTime getClosingHour() {
+    public LocalTime getClosingHour() {
         return closingHour;
     }
 
-    public void setClosingHour(LocalDateTime closingHour) {
+    public void setClosingHour(LocalTime closingHour) {
         this.closingHour = closingHour;
     }
 

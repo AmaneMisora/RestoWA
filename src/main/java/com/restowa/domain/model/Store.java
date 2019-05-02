@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -22,9 +23,8 @@ public class Store implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @NotEmpty
-    @Column(name = "key")
-    private String key;
+    @Column(name = "keystore")
+    private String keyStore;
 
     @Embedded
     private OpeningHours openingHours;
@@ -42,25 +42,27 @@ public class Store implements Serializable {
     @Column(name = "email")
     private String email;
     
-    @NotEmpty
+    @NotNull
     @Column(name = "lattitude")
     private double lattitude;
     
-    @NotEmpty
-    @Column(name = "logitude")
-    private double logitude;
+    @NotNull
+    @Column(name = "longitude")
+    private double longitude;
     
-    @NotEmpty
-    @Temporal(TemporalType.DATE)
     @Column(name = "lastmodificationdate")
     private LocalDateTime lastModificationDate;
     
     @ManyToOne
-    @Column(name = "lastmodifiedby")
-    public int lastModifiedBy;
+    @JoinColumn(name = "useraccount_id")
+    public UserAccount lastModifiedBy;
     
     @Embedded
     private Address address;
+    
+    public Store() {
+        
+    }
 
     public int getId() {
         return id;
@@ -70,12 +72,12 @@ public class Store implements Serializable {
         this.id = id;
     }
 
-    public String getKey() {
-        return key;
+    public String getKeyStore() {
+        return keyStore;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setKeyStore(String keyStore) {
+        this.keyStore = keyStore;
     }
 
     public OpeningHours getOpeningHours() {
@@ -118,12 +120,12 @@ public class Store implements Serializable {
         this.lattitude = lattitude;
     }
 
-    public double getLogitude() {
-        return logitude;
+    public double getLongitude() {
+        return longitude;
     }
 
-    public void setLogitude(double logitude) {
-        this.logitude = logitude;
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
     public LocalDateTime getLastModificationDate() {
@@ -134,11 +136,11 @@ public class Store implements Serializable {
         this.lastModificationDate = lastModificationDate;
     }
 
-    public int getLastModifiedBy() {
+    public UserAccount getLastModifiedBy() {
         return lastModifiedBy;
     }
 
-    public void setLastModifiedBy(int lastModifiedBy) {
+    public void setLastModifiedBy(UserAccount lastModifiedBy) {
         this.lastModifiedBy = lastModifiedBy;
     }
 
