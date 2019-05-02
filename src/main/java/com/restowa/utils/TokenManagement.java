@@ -5,9 +5,12 @@
  */
 package com.restowa.utils;
 
+import com.restowa.bl.concrete.UserAccountManager;
 import java.time.LocalDateTime;
 import java.util.UUID;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 /**
  *
@@ -30,10 +33,22 @@ public class TokenManagement {
         return bddToken;
     }
     
-    static public boolean verifyToken(String token){
+    static public boolean verifyToken(String token, UserAccountManager uamanager) throws ParseException{
         //decrypte le token en argument
-        //le transforme en json (parse)
+        JSONParser parser = new JSONParser(); 
+        JSONObject JSONToken = (JSONObject) parser.parse(token);
+        int idUser = (int)JSONToken.get("userID");
+        String uuid = (String)JSONToken.get("uuid");
+        LocalDateTime date = (LocalDateTime) JSONToken.get("dateExp");
+        if(date.isBefore(LocalDateTime.now())){
+            if(uamanager.getUserAccountById(idUser).getToken().equals(token)){
+                return true;
+            }else{
+                return false;
+            }
+        } else{
+            return false;
+        }
         //Vérifie si le userID avec le uuid existent dans la BDD et la date n’est pas expirée
-        return true;//Renvoie true/false
     }
 }

@@ -89,19 +89,18 @@ public class UserService {
     @RequestMapping(value = "/getUserInfo", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON)
     public JSONObject getUserInfo(@RequestBody String email, @RequestHeader HttpHeaders headers) throws JsonProcessingException, ParseException{ 
         JSONObject result = new JSONObject();
-        if (!TokenManagement.verifyToken(headers.get("authentificationToken").get(0))) {
+        if (!TokenManagement.verifyToken(headers.get("authentificationToken").get(0),uamanager)){ 
             result.put("result", "invalid token");
         } else {
             
-            List<UserAccount> userList = uamanager.getUserAccountByEmail(email);
+            List<UserAccount> userList = uamanager.getUserAccountByEmail(email);//peut etre mettre getuserbyid a la place
             if (userList.isEmpty()){
                 result.put("result", "no user with this email");
             } else{
-                ObjectMapper mapper = new ObjectMapper();
+                ObjectMapper mapper = new ObjectMapper(); // ça marche pas jattend store de yanis 
                 String userInfo = mapper.writeValueAsString(userList.get(0));
-                result.put("test", "hf");
-                //JSONParser parser = new JSONParser(); 
-                //result = (JSONObject) parser.parse(userInfo);
+                JSONParser parser = new JSONParser(); 
+                result = (JSONObject) parser.parse(userInfo);
                 
             //pas sur que le mapper marche quand on enregistre dans json object
             //si ça marche pas enregistrer dans un string puis le transformer en jsonobject avec un parser
