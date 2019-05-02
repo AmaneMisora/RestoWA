@@ -27,4 +27,8 @@ public class UserAccountManager {
     public List<UserAccount> getUserAccountByEmail(String email) {
         return this.repo.getUserAccountByEmail(email);
     }
+    
+    public boolean checkLogin(String email, String password) {
+        return this.repo.checkLogin(email, password);
+    }
 }
