@@ -68,7 +68,7 @@ public class OpeningHours implements Serializable {
     @Column(name = "thursdayallday")
     private boolean thursdayAllDay;
     
-    @Column(name = "fridayopeninghour")
+    @Column(name = "fridayopeninghour") 
     private LocalTime fridayOpeningHour;
     
     @Column(name = "fridayClosinghour")
