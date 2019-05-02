@@ -15,7 +15,6 @@ import javax.validation.constraints.Positive;
  *
  * @author Amane
  */
-
 @Embeddable
 public class Address {
     
