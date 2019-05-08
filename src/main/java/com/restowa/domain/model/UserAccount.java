@@ -81,6 +81,25 @@ public class UserAccount implements Serializable {
         this.stores = new ArrayList<>();
     }
     
+    public void setUserAccount(UserAccount userAccount) {
+        this.id = userAccount.getId();
+        this.firstName = userAccount.getFirstName();
+        this.lastName = userAccount.getLastName();
+        this.email = userAccount.getEmail();
+        this.password = userAccount.getPassword();
+        this.phoneNumber = userAccount.getPhoneNumber();
+        this.active = userAccount.isActive();
+        this.creationDate = userAccount.getCreationDate();
+        this.lastModificationDate = userAccount.getLastModificationDate();
+        this.resetPasswordLink = userAccount.getResetPasswordLink();
+        this.resetLinkValidateDate = userAccount.getResetLinkValidateDate();
+        this.isRemoved = userAccount.IsRemoved();
+        this.type = userAccount.getType();
+        this.address = userAccount.getAddress();
+        this.stores = userAccount.getStores();
+        this.token = userAccount.getToken();
+    }
+    
     public int getId() {
         return id;
     }
