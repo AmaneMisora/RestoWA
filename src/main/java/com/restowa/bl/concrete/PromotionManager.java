@@ -7,6 +7,8 @@ package com.restowa.bl.concrete;
 
 import com.restowa.domain.model.Promotion;
 import com.restowa.domain.repository.PromotionRepository;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -16,9 +18,13 @@ public class PromotionManager {
 
     private PromotionRepository repo;
     
+    @Autowired
     public PromotionManager(PromotionRepository repo)
     {
         this.repo  = repo;
     }
     
+    public List<Promotion> getAllPromotions() {
+        return this.repo.getAllPromotions();
+    }
 }
