@@ -1,3 +1,53 @@
-<%-- any content can be specified here e.g.: --%>
-<%@ page pageEncoding="UTF-8" %>
-teeest
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="cp" value="${pageContext.request.servletContext.contextPath}" scope="request" />
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+  <a class="navbar-brand" href="${cp}/">RestoWA</a>
+  <ul class="navbar-nav">
+    <c:if test="${userAccount != null && userAccount.id != 0}">
+    <c:if test="${userAccount.type != 'Client'}">
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        Magasin
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="${cp}/editStore">Nouveau</a>
+        <a class="dropdown-item" href="${cp}/listStore">Liste</a>
+      </div>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        Promotion
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="${cp}/editPromotion">Nouveau</a>
+        <a class="dropdown-item" href="${cp}/listPromotion">Liste</a>
+      </div>
+    </li>
+    </c:if>
+    <c:if test="${userAccount.type == 'Client'}">
+    <li class="nav-item">
+      <a class="nav-link" href="${cp}/listPromotion">Promotions</a>
+    </li>
+    </c:if>
+    <c:if test="${userAccount.type == 'Administrateur'}">
+    <li class="nav-item">
+      <a class="nav-link" href="${cp}/listClient">Utilisateurs</a>
+    </li>
+    </c:if>
+    <li class="nav-item pull-right">
+        <a class="nav-link" href="${cp}/profile">Profile</a>
+    </li>
+    <li class="nav-item pull-right">
+        <a class="nav-link" href="${cp}/logout">Se déconnecter</a>
+    </li>
+    </c:if>
+    <c:if test="${userAccount == null || userAccount.id == 0}">
+    <li class="nav-item">
+      <a class="nav-link" href="${cp}/login">Se connecter</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="${cp}/register">S'inscrire</a>
+    </li>
+    </c:if>
+  </ul>
+</nav>

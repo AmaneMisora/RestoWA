@@ -1,18 +1,22 @@
-<%-- 
-    Document   : accessDenied
-    Created on : May 8, 2019, 11:36:27 PM
-    Author     : yanis
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="cp" value="${pageContext.request.servletContext.contextPath}" scope="request" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+        <link rel='stylesheet' href='${cp}/webjars/bootstrap/4.3.1/css/bootstrap.min.css'>
+        <script src='${cp}/webjars/jquery/3.3.1/jquery.min.js'></script>
+        <script src='${cp}/webjars/bootstrap/4.3.1/js/bootstrap.min.js'></script>
+        <title>Error Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-        <p>${errorMessage}</p>
+        <%@include file="jspf/header.jspf" %>
+        <div class="col-sm-6 offset-sm-3 mt-5 pt-5">
+            <div class="alert alert-danger mt-5 col-12" role="alert">
+            ${errorMessage}
+            </div>
+        </div>
     </body>
 </html>

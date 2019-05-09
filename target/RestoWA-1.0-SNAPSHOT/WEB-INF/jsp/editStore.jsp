@@ -12,7 +12,7 @@
         <title>Magasin</title>
     </head>
     <body>
-        <%@include file="jspf/loggedHeader.jspf" %>
+        <%@include file="jspf/header.jspf" %>
         <div class="col-sm-8 offset-sm-2 mt-5">
             <h1 class="display-4">Magasin</h1>
             <form:form method="POST" modelAttribute="store" action="${cp}/editStore">

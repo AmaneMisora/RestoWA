@@ -9,12 +9,12 @@
         <link rel='stylesheet' href='${cp}/webjars/bootstrap/4.3.1/css/bootstrap.min.css'>
         <script src='${cp}/webjars/jquery/3.3.1/jquery.min.js'></script>
         <script src='${cp}/webjars/bootstrap/4.3.1/js/bootstrap.min.js'></script>
-        <title>Connection</title>
+        <title>Inscription</title>
     </head>
     <body>
-        <%@include file="jspf/unloggedHeader.jspf" %>
+        <%@include file="jspf/header.jspf" %>
         <div class="col-sm-6 offset-sm-3 mt-5">
-            <h1 class="display-4">Connection</h1>
+            <h1 class="display-4">Inscription</h1>
             <form:form method="POST" modelAttribute="userAccount" action="${cp}/register">
                 <div class="form-group">
                     <label for="firstNameInput">Prénom</label>
@@ -69,7 +69,7 @@
                         <form:input path="country" class="form-control" id="countryInput" aria-describedby="countryInput" placeholder="Pays" />
                         <small id="countryInput" class="form-text text-danger font-weight-bold"><form:errors path="country" /></small>
                     </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">S'inscrire</button>
                 </form:form>
             </form:form>
         </div>

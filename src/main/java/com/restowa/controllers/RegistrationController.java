@@ -11,6 +11,7 @@ import com.restowa.domain.model.Address;
 import com.restowa.domain.model.TypeEnum;
 import com.restowa.domain.model.UserAccount;
 import java.time.LocalDateTime;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -27,17 +28,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class RegistrationController {
     
+    private static final Logger LOGGER = Logger.getLogger(RegistrationController.class.getName());
+    
     @Resource
     UserAccountManager uamanager;
     
-    private static final Logger LOGGER = Logger.getLogger(LoginController.class.getName());
-    //public UserService userService;
-    
-    
     @GetMapping("/register")
     public String register(Model model) {
+        
+        LOGGER.log(Level.INFO, "Start RegistrationController (register)");
+        
         model.addAttribute("userAccount", new UserAccount());
         model.addAttribute("address", new Address());
+        
+        LOGGER.log(Level.INFO, "End RegistrationController");
 
         return "register";
     }
@@ -45,10 +49,14 @@ public class RegistrationController {
     @PostMapping("/register")
     public String checkAndCreateUserAccount(@Valid UserAccount userAccount, BindingResult userAccountResult, @Valid Address address, BindingResult addressResult, Model model) {
 
+        LOGGER.log(Level.INFO, "Start RegistrationController (checkAndCreateUserAccount)");
+        
         if (userAccountResult.hasErrors() || addressResult.hasErrors()) {
+            LOGGER.log(Level.INFO, "End RegistrationController");
             return "register";
         }else if(!uamanager.getUserAccountByEmail(userAccount.getEmail()).isEmpty()) {
             userAccountResult.addError(new FieldError("UserAccount", "email", "Cet email est déjà utilisé"));
+            LOGGER.log(Level.INFO, "End RegistrationController");
             return "register";
         }
 
@@ -63,7 +71,7 @@ public class RegistrationController {
         uamanager.saveUserAccount(userAccount);
         
         
-        // /!\/!\/!\ Retourner vers la page après connexion lorsqu'elle existe /!\/!\/!\
-        return "redirect:/";
+        LOGGER.log(Level.INFO, "End RegistrationController");   
+        return "redirect:login";
     }
 }

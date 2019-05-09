@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -35,18 +36,29 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class EditStoreController {
     
+    private static final Logger LOGGER = Logger.getLogger(EditStoreController.class.getName());
+        
     @Resource
     private StoreManager storeManager;
     
-    private static final Logger LOGGER = Logger.getLogger(LoginController.class.getName());
-    
     @GetMapping("/editStore")
     public ModelAndView store(@SessionAttribute(name="userAccount", required=false) UserAccount userAccount, Integer storeId, String action) {
+    
+        LOGGER.log(Level.INFO, "Start EditStoreController (store)");
         
         // Need to be connected to access this page
         if(userAccount == null) {
             ModelAndView mav = new ModelAndView("accessDenied");
             mav.addObject("errorMessage", "Vous devez vous connecter pour pouvoir avoir accès à cette page !");
+            LOGGER.log(Level.SEVERE, "Access right not sufficient");
+            LOGGER.log(Level.INFO, "End EditStoreController");
+            return mav;
+        }
+        if(userAccount.getId() == 0) {
+            ModelAndView mav = new ModelAndView("accessDenied");
+            mav.addObject("errorMessage", "Vous devez vous connecter pour pouvoir avoir accès à cette page !");
+            LOGGER.log(Level.SEVERE, "Access right not sufficient");
+            LOGGER.log(Level.INFO, "End EditStoreController");
             return mav;
         }
         
@@ -57,6 +69,8 @@ public class EditStoreController {
             if(userAccount.getType() == TypeEnum.Client) {
                 ModelAndView mav = new ModelAndView("accessDenied");
                 mav.addObject("errorMessage", "Vous n'avez pas les droits pour créer un magasin !");
+                LOGGER.log(Level.SEVERE, "Access right not sufficient");
+                LOGGER.log(Level.INFO, "End EditStoreController");
                 return mav;
             }
             
@@ -66,6 +80,7 @@ public class EditStoreController {
             model.addObject("openingHours", new OpeningHours());
             model.addObject("address", new Address());
 
+            LOGGER.log(Level.INFO, "End EditStoreController");
             return model;
         } else if(storeId != null && action.equals("update")) {
             
@@ -81,30 +96,48 @@ public class EditStoreController {
                     model.addObject("openingHours", store.getOpeningHours());
                     model.addObject("address", store.getAddress());
                     
+                    LOGGER.log(Level.INFO, "End EditStoreController");
                     return model;
                 }else {
                     ModelAndView mav = new ModelAndView("accessDenied");
                     mav.addObject("errorMessage", "Vous ne pouvez pas modifier un magasin qui ne vous appartient pas !");
+                    LOGGER.log(Level.SEVERE, "Access right not sufficient");
+                    LOGGER.log(Level.INFO, "End EditStoreController");
                     return mav;
                 }
             } else {
                 ModelAndView mav = new ModelAndView("accessDenied");
                 mav.addObject("errorMessage", "Vous essayer de modifier un magasin qui n'éxiste pas ou qui ne vous appartient pas !");
+                LOGGER.log(Level.SEVERE, "Access right not sufficient");
+                LOGGER.log(Level.INFO, "End EditStoreController");
                 return mav;
             }
         }
         ModelAndView mav = new ModelAndView("accessDenied");
         mav.addObject("errorMessage", "Un problème est survenu dans l'url !");
+        LOGGER.log(Level.SEVERE, "Access right not sufficient");
+        LOGGER.log(Level.INFO, "End EditStoreController");
         return mav;
     }
     
     @PostMapping("/editStore")
-    public ModelAndView editStore(@SessionAttribute("userAccount") UserAccount userAccount, @Valid Store store, BindingResult storeResult, @Valid OpeningHours openingHours, BindingResult openingHoursResult, @Valid Address address, BindingResult addressResult, Model model, Integer storeId, String action) {
+    public ModelAndView editStore(@SessionAttribute(name="userAccount", required=false) UserAccount userAccount, @Valid Store store, BindingResult storeResult, @Valid OpeningHours openingHours, BindingResult openingHoursResult, @Valid Address address, BindingResult addressResult, Model model, Integer storeId, String action) {
 
+        LOGGER.log(Level.INFO, "Start EditStoreController (editStore)");
+        
         // Need to be connected to access this page
         if(userAccount == null) {
             ModelAndView mav = new ModelAndView("accessDenied");
             mav.addObject("errorMessage", "Vous devez vous connecter pour pouvoir avoir accès à cette page !");
+            LOGGER.log(Level.SEVERE, "Access right not sufficient");
+            LOGGER.log(Level.INFO, "End EditStoreController");
+            return mav;
+        }
+        if(userAccount.getId() == 0) {
+            ModelAndView mav = new ModelAndView("accessDenied");
+            mav.addObject("errorMessage", "Vous devez vous connecter pour pouvoir avoir accès à cette page !");
+            LOGGER.log(Level.SEVERE, "Access right not sufficient");
+            LOGGER.log(Level.INFO, "End EditStoreController");
             return mav;
         }
         
@@ -112,6 +145,8 @@ public class EditStoreController {
         if(userAccount.getType() == TypeEnum.Client) {
                 ModelAndView mav = new ModelAndView("accessDenied");
                 mav.addObject("errorMessage", "Vous n'avez pas les droits pour créer ou modifier un magasin !");
+                LOGGER.log(Level.SEVERE, "Access right not sufficient");
+                LOGGER.log(Level.INFO, "End EditStoreController");
                 return mav;
             }
         
@@ -121,13 +156,11 @@ public class EditStoreController {
         
             // If the form contains error
             if (storeResult.hasErrors() || addressResult.hasErrors() || openingHoursResult.hasErrors()) {
-                System.out.println("test : " + storeResult.hasErrors());
-                System.out.println("test : " + addressResult.hasErrors());
-                System.out.println("test : " + openingHoursResult.hasErrors());
                 ModelAndView mav = new ModelAndView("editStore");
                 mav.addObject("store", store);
                 mav.addObject("address", address);
                 mav.addObject("openingHours", openingHours);
+                LOGGER.log(Level.INFO, "End EditStoreController");
                 return mav;
             }
 
@@ -139,14 +172,16 @@ public class EditStoreController {
             
             //Check if a new keyStore has to be generated
             boolean key = false;
-            if(store.getId() == 0) {
+            if(store.getId() <= 0) {
                 key = true;
                 store.setKeyStore("temp");
             } else {
                 // An owner can modify only his stores
                 if(userAccount.getType() != TypeEnum.Administrateur && store.getLastModifiedBy().getId() != userAccount.getId()) {
                     ModelAndView mav = new ModelAndView("accessDenied");
-                    mav.addObject("errorMessage", "Vous n'avez pas les droits pour modifier un magasin ce magasin !");
+                    mav.addObject("errorMessage", "Vous n'avez pas les droits pour modifier ce magasin !");
+                    LOGGER.log(Level.SEVERE, "Access right not sufficient");
+                    LOGGER.log(Level.INFO, "End EditStoreController");
                     return mav;
                 }
             }
@@ -156,9 +191,10 @@ public class EditStoreController {
 
             store = storeManager.saveStore(store);
             store.setKeyStore("STORE-"+store.getId());
-            store = storeManager.saveStore(store);
+            storeManager.saveStore(store);
 
-            return returnListStore(userAccount);
+            LOGGER.log(Level.INFO, "End EditStoreController");
+            return new ModelAndView("redirect:listStore");
         } else if(storeId != null && action.equals("delete")) {
             
             // Modify an existing store
@@ -169,21 +205,27 @@ public class EditStoreController {
                     
                     storeManager.deleteStore(storeManager.getStoreById(storeId));
                     
-                    /* /!\ Return to listView /!\ */
-                    return returnListStore(userAccount);
+                    LOGGER.log(Level.INFO, "End EditStoreController");
+                    return new ModelAndView("redirect:listStore");
                 }else {
                     ModelAndView mav = new ModelAndView("accessDenied");
                     mav.addObject("errorMessage", "Vous ne pouvez pas supprimer un magasin qui ne vous appartient pas !");
+                    LOGGER.log(Level.SEVERE, "Access right not sufficient");
+                    LOGGER.log(Level.INFO, "End EditStoreController");
                     return mav;
                 }
             } else {
                 ModelAndView mav = new ModelAndView("accessDenied");
                 mav.addObject("errorMessage", "Vous essayer de modifier un magasin qui n'éxiste pas ou qui ne vous appartient pas !");
+                LOGGER.log(Level.SEVERE, "Access right not sufficient");
+                LOGGER.log(Level.INFO, "End EditStoreController");
                 return mav;
             }
         }
         ModelAndView mav = new ModelAndView("accessDenied");
         mav.addObject("errorMessage", "Un problème est survenu dans l'url !");
+        LOGGER.log(Level.SEVERE, "Access right not sufficient");
+        LOGGER.log(Level.INFO, "End EditStoreController");
         return mav;
     }
     
@@ -248,30 +290,37 @@ public class EditStoreController {
             oh.setSundayOpeningHour(LocalTime.of(0, 0));
             oh.setSundayClosingHour(LocalTime.of(0, 0));
         }
+        if(oh.getMondayOpeningHour() == null)
+            oh.setMondayOpeningHour(LocalTime.MIDNIGHT);
+        if(oh.getTuesdayOpeningHour() == null)
+            oh.setTuesdayOpeningHour(LocalTime.MIDNIGHT);
+        if(oh.getWednesdayOpeningHour() == null)
+            oh.setWednesdayOpeningHour(LocalTime.MIDNIGHT);
+        if(oh.getThursdayOpeningHour() == null)
+            oh.setThursdayOpeningHour(LocalTime.MIDNIGHT);
+        if(oh.getFridayOpeningHour() == null)
+            oh.setFridayOpeningHour(LocalTime.MIDNIGHT);
+        if(oh.getSaturdayOpeningHour() == null)
+            oh.setSaturdayOpeningHour(LocalTime.MIDNIGHT);
+        if(oh.getSundayOpeningHour() == null)
+            oh.setSundayOpeningHour(LocalTime.MIDNIGHT);
+        
+        if(oh.getMondayClosingHour() == null)
+            oh.setMondayClosingHour(LocalTime.MIDNIGHT);
+        if(oh.getTuesdayClosingHour() == null)
+            oh.setTuesdayClosingHour(LocalTime.MIDNIGHT);
+        if(oh.getWednesdayClosingHour() == null)
+            oh.setWednesdayClosingHour(LocalTime.MIDNIGHT);
+        if(oh.getThursdayClosingHour() == null)
+            oh.setThursdayClosingHour(LocalTime.MIDNIGHT);
+        if(oh.getFridayClosingHour() == null)
+            oh.setFridayClosingHour(LocalTime.MIDNIGHT);
+        if(oh.getSaturdayClosingHour() == null)
+            oh.setSaturdayClosingHour(LocalTime.MIDNIGHT);
+        if(oh.getSundayClosingHour() == null)
+            oh.setSundayClosingHour(LocalTime.MIDNIGHT);
         
         return oh;
-    }
-    
-    public ModelAndView returnListStore(UserAccount userAccount) {
-        // Check if user has rights
-        if(userAccount == null) {
-            ModelAndView mav = new ModelAndView("accessDenied");
-            mav.addObject("errorMessage", "Vous devez vous connecter pour pouvoir avoir accès à cette page !");
-            return mav;
-        }
-
-        ModelAndView mav = new ModelAndView("listStore");
-
-        List<Store> stores = storeManager.getAllStore();
-        List<Store> finalListStore = new ArrayList<Store>();
-
-        for(Store s : stores) {
-            if(s.getLastModifiedBy().getId() == userAccount.getId())
-                finalListStore.add(s);
-        }
-
-        mav.addObject("stores", stores);
-        return mav;
     }
     
 }

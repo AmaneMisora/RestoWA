@@ -10,6 +10,7 @@ import java.util.Date;
 import javax.persistence.*;
 import static javax.persistence.TemporalType.DATE;
 import javax.validation.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -22,9 +23,8 @@ public class Promotion {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @NotEmpty
-    @Column(name = "key")
-    private String key;
+    @Column(name = "keypromotion")
+    private String keyPromotion;
     
     @NotEmpty
     @Column(name = "title")
@@ -38,22 +38,21 @@ public class Promotion {
     @Column(name = "longdescription")
     private String longDescription;
     
-    @NotEmpty
     @Column(name = "position")
     private int position;
     
-    @NotEmpty
     @Column(name = "disabled")
     private boolean disabled;
     
-    @NotEmpty
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "startdate")
     private LocalDate startDate;
     
-    @NotEmpty
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "enddate")
     private LocalDate endDate;
     
+    @NotEmpty
     @Column(name = "imageurl")
     private String imageURL;
 
@@ -69,12 +68,12 @@ public class Promotion {
         this.id = id;
     }
 
-    public String getKey() {
-        return key;
+    public String getKeyPromotion() {
+        return keyPromotion;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setKeyPromotion(String keyPromotion) {
+        this.keyPromotion = keyPromotion;
     }
 
     public String getTitle() {
@@ -139,5 +138,11 @@ public class Promotion {
 
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
+    }
+    
+    public boolean contains(String word) {
+        if(keyPromotion.contains(word) || title.contains(word) || shortDescription.contains(word) || longDescription.contains(word) || String.valueOf(position).contains(word) || startDate.toString().contains(word) || endDate.toString().contains(word))
+            return true;
+        return false;
     }
 }

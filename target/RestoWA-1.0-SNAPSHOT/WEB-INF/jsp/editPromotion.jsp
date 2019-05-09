@@ -12,10 +12,11 @@
         <title>Promotion</title>
     </head>
     <body>
-        <%@include file="jspf/loggedHeader.jspf" %>
+        <%@include file="jspf/header.jspf" %>
         <div class="col-sm-8 offset-sm-2 mt-5">
             <h1 class="display-4">Promotion</h1>
             <form:form method="POST" modelAttribute="promotion" action="${cp}/editPromotion">
+                <form:input path="id" type="hidden" />
                 <div class="form-group">
                     <label for="titleInput">Titre</label>
                     <form:input path="title" type="text" class="form-control" id="titleInput" aria-describedby="titleInput" placeholder="Titre" />
@@ -53,7 +54,7 @@
                 </div>
                 <div class="form-group">
                     <label for="imageURLInput">Image</label>
-                    <form:input path="imageURL" type="file" class="form-control-file" id="imageURLInput" aria-describedby="imageURLInput" />
+                    <form:input path="imageURL" type="text" class="form-control-file" id="imageURLInput" aria-describedby="imageURLInput" />
                     <small id="imageURLInput" class="form-text text-danger font-weight-bold"><form:errors path="imageURL" /></small>
                 </div>
                 <button type="submit" class="btn btn-primary">Envoyé</button>

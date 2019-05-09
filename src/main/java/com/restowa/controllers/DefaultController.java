@@ -1,14 +1,9 @@
 
 package com.restowa.controllers;
 
-import com.restowa.DAO.UserAccountDAO;
 import com.restowa.bl.concrete.UserAccountManager;
-import com.restowa.domain.model.Address;
-import com.restowa.domain.model.OpeningHours;
-import com.restowa.domain.model.Store;
-import com.restowa.domain.model.TypeEnum;
-import com.restowa.domain.model.UserAccount;
-import java.time.LocalDateTime;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,25 +13,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class DefaultController {
 
-//    @Resource
-//    UserAccountRepository repo;
+    private static final Logger LOGGER = Logger.getLogger(DefaultController.class.getName());
     
     @Resource
     UserAccountManager uamanager;
     
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    //@Transactional
     public String index(ModelMap map) {
-        UserAccount ua = new UserAccount();
-        //uamanager.saveUserAccount(ua);
-        //UserAccount ua = repo.findById(1).get();
-        /*
-        UserAccount ua = uamanager.getUserAccountById(1);
-        
-        map.put("msg", "Hello Spring 5 Web MVC!");
-        map.put("userId", ua.getID());
-        map.put("userName", ua.getName());
-*/
+        LOGGER.log(Level.INFO, "Start DefaultController (index)");
+        LOGGER.log(Level.INFO, "End DefaultController");
         return "index";
     }
     

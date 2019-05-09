@@ -12,17 +12,23 @@
         <title>Connection</title>
     </head>
     <body>
-        <%@include file="jspf/unloggedHeader.jspf" %>
+        <%@include file="jspf/header.jspf" %>
         <div class="col-sm-6 offset-sm-3 mt-5">
             <h1 class="display-4">Connection</h1>
-            <form:form method="POST" modelAttribute="userAccount" action="${cp}/login">
+            <form method="POST" action="${cp}/login">
                 <div class="form-group">
-                    <label for="nameInput">Nom</label>
-                    <form:input path="email" class="form-control" id="emailInput" aria-describedby="emailInput" placeholder="email" />
-                    <small id="emailInput" class="form-text text-danger font-weight-bold"><form:errors path="email" /></small>
+                    <c:if test="${errorMessage != null}">
+                    <div class="alert alert-danger" role="alert">
+                    ${errorMessage}
+                    </div>      
+                    </c:if>
+                    <label for="emailInput">Email</label>
+                    <input name="email" path="email" class="form-control" id="emailInput" aria-describedby="emailInput" placeholder="email" />
+                    <label for="passwordInput">Mot de passe</label>
+                    <input name="password" path="password" type="password" class="form-control" id="passwordInput" aria-describedby="passwordInput" />
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form:form>
+                <button type="submit" class="btn btn-primary">Se connecter</button>
+            </form>
         </div>
     </body>
 </html>

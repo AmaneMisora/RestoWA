@@ -18,8 +18,8 @@
         <title>Magasins</title>
     </head>
     <body>
-        <%@include file="jspf/loggedHeader.jspf" %>
-        <div class="album py-5 bg-light">
+        <%@include file="jspf/header.jspf" %>
+        <div class="album py-5 bg-light mt-4">
         <div class="container">
             <div class="col-md-13 mb-3">
                 <form action="${cp}/listStore" method="POST" class="card card-sm">
