@@ -6,12 +6,6 @@
 package com.restowa.domain.repository;
 
 import com.restowa.domain.model.Store;
-<<<<<<< HEAD
-=======
-import com.restowa.domain.model.UserAccount;
-import java.util.List;
-import java.util.Optional;
->>>>>>> master
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -19,7 +13,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author yanis
  */
 public interface StoreRepository extends JpaRepository<Store, Integer>{
-    
-   
     
 }

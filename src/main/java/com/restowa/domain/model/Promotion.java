@@ -26,35 +26,35 @@ public class Promotion {
     
     @NotEmpty
     @Column(name = "title")
-    private String Title;
+    private String title;
     
     @NotEmpty
     @Column(name = "shortdescription")
-    private String ShortDescription;
+    private String shortDescription;
     
     @NotEmpty
     @Column(name = "longdescription")
-    private String LongDescription;
+    private String longDescription;
     
     @NotEmpty
     @Column(name = "position")
-    private int Position;
+    private int position;
     
     @NotEmpty
     @Column(name = "disabled")
-    private boolean Disabled;
+    private boolean disabled;
     
     @Temporal(DATE)
     @NotEmpty
     @Column(name = "startdate")
-    private Date StartDate;
+    private Date startDate;
     
     @Temporal(DATE)
     @NotEmpty
     @Column(name = "enddate")
-    private Date EndDate;
+    private Date endDate;
     
     @Column(name = "Imageurl")
-    private String ImageURL;
+    private String ismageURL;
 
 }
