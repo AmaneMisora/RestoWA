@@ -27,4 +27,9 @@ public class PromotionManager {
     public List<Promotion> getAllPromotions() {
         return this.repo.getAllPromotions();
     }
+    
+    public void deletePromotion(Promotion promotion)
+    {
+        this.repo.delete(promotion);
+    }
 }
