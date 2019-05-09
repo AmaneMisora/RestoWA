@@ -92,7 +92,7 @@ public class UserService {
      * puis met toutes les info de l'utilisateur dans un json que l'on renvoie
      */
     @RequestMapping(value = "/getUserInfo", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON)
-    public String getUserInfo(@RequestBody int id, @RequestHeader HttpHeaders headers) throws JsonProcessingException, ParseException{ 
+    public JSONObject getUserInfo(@RequestBody int id, @RequestHeader HttpHeaders headers) throws JsonProcessingException, ParseException{ 
         JSONObject result = new JSONObject();
         
         UserAccount user = uamanager.getUserAccountById(id);
@@ -112,17 +112,17 @@ public class UserService {
                 result.put("creation date",user.getCreationDate());
                 result.put("type",user.getType());
                 JSONObject adresse = new JSONObject();
-                adresse.put("email",user.getAddress().getCity());
-                adresse.put("phone number",user.getAddress().getCountry());
-                adresse.put("creation date",user.getAddress().getState());
-                adresse.put("type",user.getAddress().getZipCode());
+                adresse.put("city",user.getAddress().getCity());
+                adresse.put("country",user.getAddress().getCountry());
+                adresse.put("state",user.getAddress().getState());
+                adresse.put("zip code",user.getAddress().getZipCode());
                 result.put("adresse",adresse);  
             } else {         
                 result.put("result", resultVerifyToken);
             } 
         }
         
-        return result.toString();
+        return result;
     }
     
 }
