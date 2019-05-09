@@ -57,6 +57,4 @@ public class Promotion {
     @Column(name = "Imageurl")
     private String ImageURL;
 
-
-    
 }

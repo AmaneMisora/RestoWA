@@ -6,7 +6,6 @@
 package com.restowa.domain.repository;
 
 import com.restowa.domain.model.Store;
-import com.restowa.domain.model.UserAccount;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

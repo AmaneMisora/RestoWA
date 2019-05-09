@@ -6,7 +6,6 @@
 package com.restowa.bl.concrete;
 
 import com.restowa.domain.model.Store;
-import com.restowa.domain.model.UserAccount;
 import com.restowa.domain.repository.StoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
