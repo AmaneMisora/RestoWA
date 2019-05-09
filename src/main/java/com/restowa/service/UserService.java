@@ -12,11 +12,13 @@ import com.restowa.bl.concrete.UserAccountManager;
 import com.restowa.domain.model.Address;
 import com.restowa.domain.model.TypeEnum;
 import com.restowa.domain.model.UserAccount;
-import com.restowa.utils.TokenManagement;
+import com.restowa.utils.JWTTokenManagement;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.Resource;
-import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.core.MediaType;
+import org.jose4j.lang.JoseException;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -37,6 +39,7 @@ public class UserService {
     
     @Resource
     UserAccountManager uamanager;
+    
     
     
     public UserService(){    
@@ -69,10 +72,14 @@ public class UserService {
         }else {
             if (userList.get(0).getPassword().equals((String)json.get("password"))){
                 resultLogin.put("login", true); 
-                String stringToken = TokenManagement.generateToken(userList.get(0).getId());
-                //encripter le string
-                String stringEncrypToken = stringToken;
-                userList.get(0).setToken(stringEncrypToken);
+                String stringToken = "";
+                try {
+                    stringToken = JWTTokenManagement.generateToken(userList.get(0).getId());
+                } catch (JoseException ex) {
+                    Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                userList.get(0).setToken(stringToken);
                 uamanager.saveUserAccount(userList.get(0));
             } else {
                 resultLogin.put("login", false);
@@ -87,27 +94,26 @@ public class UserService {
      * puis met toutes les info de l'utilisateur dans un json que l'on renvoie
      */
     @RequestMapping(value = "/getUserInfo", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON)
-    public JSONObject getUserInfo(@RequestBody String email, @RequestHeader HttpHeaders headers) throws JsonProcessingException, ParseException{ 
+    public String getUserInfo(@RequestBody int id, @RequestHeader HttpHeaders headers) throws JsonProcessingException, ParseException{ 
         JSONObject result = new JSONObject();
-        if (!TokenManagement.verifyToken(headers.get("authentificationToken").get(0),uamanager)){ 
-            result.put("result", "invalid token");
-        } else {
-            
-            List<UserAccount> userList = uamanager.getUserAccountByEmail(email);//peut etre mettre getuserbyid a la place
-            if (userList.isEmpty()){
-                result.put("result", "no user with this email");
-            } else{
-                ObjectMapper mapper = new ObjectMapper(); // ça marche pas jattend store de yanis 
-                String userInfo = mapper.writeValueAsString(userList.get(0));
+        
+        UserAccount user = uamanager.getUserAccountById(id);//peut etre mettre getuserbyid a la place
+        if (user == null){
+            result.put("result", "no user with this id");
+        } else{
+            String headerToken = headers.get("authentificationToken").get(0); //vcerifier si il ya bien un authentificationToken 
+            String userToken = user.getToken();
+            if (JWTTokenManagement.verifyToken(headerToken , userToken).startsWith("JWT validation succeeded! ")){ 
+                ObjectMapper mapper = new ObjectMapper(); 
+                String userInfo = mapper.writeValueAsString(user);
                 JSONParser parser = new JSONParser(); 
-                result = (JSONObject) parser.parse(userInfo);
-                
-            //pas sur que le mapper marche quand on enregistre dans json object
-            //si ça marche pas enregistrer dans un string puis le transformer en jsonobject avec un parser
-            }  
+                result = (JSONObject) parser.parse(userInfo);  
+            } else {         
+                result.put("result", "invalid token");
+            } 
         }
         
-        return result;
+        return result.toString();
     }
     
 }
