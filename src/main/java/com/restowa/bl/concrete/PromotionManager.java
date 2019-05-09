@@ -41,8 +41,8 @@ public class PromotionManager {
         this.repo.delete(promotion);
     }
     
-    public Optional<Promotion> getPromotionById(int id)
+    public Promotion getPromotionById(int id)
     {
-        return this.repo.findById(id);
+        return this.repo.findById(id).get();
     }
 }
