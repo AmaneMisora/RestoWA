@@ -33,13 +33,10 @@ public class PromotionManager {
     
     public List<Promotion> getAllPromotions() {
         return this.repo.findAll();
-<<<<<<< Updated upstream
     }
     
     public void deletePromotion(Promotion promotion)
     {
         this.repo.delete(promotion);
-=======
->>>>>>> Stashed changes
     }
 }
