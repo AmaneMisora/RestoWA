@@ -7,6 +7,7 @@ package com.restowa.bl.concrete;
 
 import com.restowa.domain.model.Store;
 import com.restowa.domain.repository.StoreRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,5 +27,13 @@ public class StoreManager {
     
     public Store saveStore(Store store) {
         return this.repo.save(store);
+    }
+    
+    public Store getStoreById(int id) {
+        return this.repo.findById(id).get();
+    }
+    
+    public List<Store> getAllStore() {
+        return this.repo.findAll();
     }
 }

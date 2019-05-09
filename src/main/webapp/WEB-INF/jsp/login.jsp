@@ -18,8 +18,8 @@
             <form:form method="POST" modelAttribute="userAccount" action="${cp}/login">
                 <div class="form-group">
                     <label for="nameInput">Nom</label>
-                    <form:input path="firstName" class="form-control" id="nameInput" aria-describedby="nameInput" placeholder="Nom" />
-                    <small id="nameInput" class="form-text text-danger font-weight-bold"><form:errors path="firstName" /></small>
+                    <form:input path="email" class="form-control" id="emailInput" aria-describedby="emailInput" placeholder="email" />
+                    <small id="emailInput" class="form-text text-danger font-weight-bold"><form:errors path="email" /></small>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form:form>

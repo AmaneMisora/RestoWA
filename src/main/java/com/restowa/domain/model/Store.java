@@ -152,5 +152,10 @@ public class Store implements Serializable {
         this.address = address;
     }
     
+    public boolean contains(String word) {
+        if(keyStore.contains(word) || name.contains(word) || phoneNumber.contains(word) || email.contains(word) || address.getCity().contains(word) || address.getCountry().contains(word) || address.getState().contains(word) || address.getStreet().contains(word) || String.valueOf(address.getZipCode()).contains(word) || lastModifiedBy.getFirstName().contains(word) || lastModifiedBy.getLastName().contains(word) || String.valueOf(lattitude).contains(word) || String.valueOf(longitude).contains(word))
+            return true;
+        return false;
+    }
     
 }
