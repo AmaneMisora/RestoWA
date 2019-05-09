@@ -12,7 +12,7 @@ import com.restowa.bl.concrete.UserAccountManager;
 import com.restowa.domain.model.Address;
 import com.restowa.domain.model.TypeEnum;
 import com.restowa.domain.model.UserAccount;
-import com.restowa.utils.JWTTokenManagement;
+import com.restowa.utils.JWTTokenManager;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,8 +40,6 @@ public class UserService {
     @Resource
     UserAccountManager uamanager;
     
-    
-    
     public UserService(){    
     }
     
@@ -61,10 +59,10 @@ public class UserService {
     /* obj est un string de la forme d'un json
      */
     @RequestMapping(value = "/loginVerify", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON)
-    public JSONObject verifyLogin(@RequestBody String obj) throws ParseException { 
+    public JSONObject verifyLogin(@RequestBody String form) throws ParseException { 
         
         JSONParser parser = new JSONParser(); 
-        JSONObject json = (JSONObject) parser.parse(obj);
+        JSONObject json = (JSONObject) parser.parse(form);
         List<UserAccount> userList = uamanager.getUserAccountByEmail((String)json.get("email"));
         JSONObject resultLogin = new JSONObject();
         if (userList.isEmpty()){
@@ -74,7 +72,7 @@ public class UserService {
                 resultLogin.put("login", true); 
                 String stringToken = "";
                 try {
-                    stringToken = JWTTokenManagement.generateToken(userList.get(0).getId());
+                    stringToken = JWTTokenManager.getInstance().generateToken(userList.get(0).getId());
                 } catch (JoseException ex) {
                     Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -97,19 +95,30 @@ public class UserService {
     public String getUserInfo(@RequestBody int id, @RequestHeader HttpHeaders headers) throws JsonProcessingException, ParseException{ 
         JSONObject result = new JSONObject();
         
-        UserAccount user = uamanager.getUserAccountById(id);//peut etre mettre getuserbyid a la place
+        UserAccount user = uamanager.getUserAccountById(id);
+        
         if (user == null){
             result.put("result", "no user with this id");
         } else{
             String headerToken = headers.get("authentificationToken").get(0); //vcerifier si il ya bien un authentificationToken 
             String userToken = user.getToken();
-            if (JWTTokenManagement.verifyToken(headerToken , userToken).startsWith("JWT validation succeeded! ")){ 
-                ObjectMapper mapper = new ObjectMapper(); 
-                String userInfo = mapper.writeValueAsString(user);
-                JSONParser parser = new JSONParser(); 
-                result = (JSONObject) parser.parse(userInfo);  
+            String resultVerifyToken = JWTTokenManager.getInstance().verifyToken(headerToken , userToken);
+            if (resultVerifyToken.startsWith("Token validation succeeded! ")){ 
+                result.put("id",user.getId());
+                result.put("firstName",user.getFirstName());
+                result.put("lastName",user.getLastName());
+                result.put("email",user.getEmail());
+                result.put("phone number",user.getPhoneNumber());
+                result.put("creation date",user.getCreationDate());
+                result.put("type",user.getType());
+                JSONObject adresse = new JSONObject();
+                adresse.put("email",user.getAddress().getCity());
+                adresse.put("phone number",user.getAddress().getCountry());
+                adresse.put("creation date",user.getAddress().getState());
+                adresse.put("type",user.getAddress().getZipCode());
+                result.put("adresse",adresse);  
             } else {         
-                result.put("result", "invalid token");
+                result.put("result", resultVerifyToken);
             } 
         }
         
