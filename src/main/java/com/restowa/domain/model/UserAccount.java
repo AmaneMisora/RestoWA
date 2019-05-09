@@ -64,7 +64,7 @@ public class UserAccount implements Serializable {
     @OneToMany(mappedBy = "lastModifiedBy")
     private List<Store> stores;
     
-    @Column(name = "token")
+    @Column(name = "token", length = 1024)
     private String token;
     
     public UserAccount() {

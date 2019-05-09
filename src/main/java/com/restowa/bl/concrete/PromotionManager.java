@@ -24,6 +24,11 @@ public class PromotionManager {
         this.repo  = repo;
     }
     
+    public Promotion savePromotion(Promotion promotion)
+    {
+        return this.repo.save(promotion);
+    }
+    
     public List<Promotion> getAllPromotions() {
         return this.repo.findAll();
     }
