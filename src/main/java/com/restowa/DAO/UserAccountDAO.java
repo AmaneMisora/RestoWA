@@ -99,12 +99,22 @@ public class UserAccountDAO {
     }
     */
     
+    /**
+     * Search UserAccount by the mail
+     * @param email 
+     * @return a list of userAccouts corresponding to the email
+     */
     public static List<UserAccount> getUserAccountByEmail(String email) {
         EntityManager em = MainDAO.getEntityManager();
         Query query = em.createQuery("FROM UserAccount WHERE email = emailToCheck").setParameter("emailToCheck", email);
         return query.getResultList();
     }
     
+    /**
+     * Save the UserAccount and make it persistant
+     * @param ua
+     * @return the userAccount saved
+     */
     public static UserAccount saveUser(UserAccount ua) {
         EntityManager em = MainDAO.getEntityManager();
         
@@ -115,6 +125,11 @@ public class UserAccountDAO {
         return ua;
     }
     
+    /**
+     * Search UserAccounts by the id
+     * @param id
+     * @return the userAccounts correspoonding to the id
+     */
     public static List<UserAccount> getUserAccountById(int id) {
         EntityManager em = MainDAO.getEntityManager();
         Query query = em.createQuery("FROM UserAccount WHERE id = idToCheck").setParameter("idToCheck", id);

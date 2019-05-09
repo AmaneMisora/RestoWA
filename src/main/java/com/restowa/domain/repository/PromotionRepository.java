@@ -9,5 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface PromotionRepository extends JpaRepository<Store, Integer> {
    
     List<Promotion> getAllPromotions();
+
+    public void delete(Promotion promotion);
     
 }

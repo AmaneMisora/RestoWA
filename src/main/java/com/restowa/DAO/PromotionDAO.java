@@ -16,10 +16,15 @@ import javax.persistence.Query;
  */
 public class PromotionDAO {
     
-    public static List<Promotion> getAllPromotions() {
+    
+    /**
+     * @return All promotions from the database
+     */
+    public static List<Promotion> getAllPromotions() 
+    {
         EntityManager em = MainDAO.getEntityManager();
         Query query = em.createQuery("FROM Promotion");
         return query.getResultList();
     }
-    
+       
 }
