@@ -25,7 +25,7 @@ public class PromotionManager {
     }
     
     public List<Promotion> getAllPromotions() {
-        return this.repo.getAllPromotions();
+        return this.repo.findAll();
     }
     
     public void deletePromotion(Promotion promotion)

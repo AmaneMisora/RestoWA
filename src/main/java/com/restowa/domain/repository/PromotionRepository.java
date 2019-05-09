@@ -6,7 +6,7 @@ import com.restowa.domain.model.Store;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PromotionRepository extends JpaRepository<Store, Integer> {
+public interface PromotionRepository extends JpaRepository<Promotion, Integer> {
    
     List<Promotion> getAllPromotions();
 
