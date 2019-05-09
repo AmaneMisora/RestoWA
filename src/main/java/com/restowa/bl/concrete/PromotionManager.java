@@ -8,6 +8,7 @@ package com.restowa.bl.concrete;
 import com.restowa.domain.model.Promotion;
 import com.restowa.domain.repository.PromotionRepository;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -38,5 +39,10 @@ public class PromotionManager {
     public void deletePromotion(Promotion promotion)
     {
         this.repo.delete(promotion);
+    }
+    
+    public Promotion getPromotionById(int id)
+    {
+        return this.repo.findById(id).get();
     }
 }

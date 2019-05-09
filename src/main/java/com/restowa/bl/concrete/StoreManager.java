@@ -8,6 +8,7 @@ package com.restowa.bl.concrete;
 import com.restowa.domain.model.Store;
 import com.restowa.domain.repository.StoreRepository;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -40,4 +41,5 @@ public class StoreManager {
     public void deleteStore(Store store) {
         this.repo.delete(store);
     }
+    
 }
