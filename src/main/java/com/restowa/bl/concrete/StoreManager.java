@@ -26,7 +26,7 @@ public class StoreManager {
     }
     
     public Store saveStore(Store store) {
-        return this.repo.save(store);
+        return this.repo.saveAndFlush(store);
     }
     
     public Store getStoreById(int id) {
@@ -35,5 +35,9 @@ public class StoreManager {
     
     public List<Store> getAllStore() {
         return this.repo.findAll();
+    }
+    
+    public void deleteStore(Store store) {
+        this.repo.delete(store);
     }
 }

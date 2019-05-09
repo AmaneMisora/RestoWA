@@ -7,8 +7,10 @@ package com.restowa.domain.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Positive;
 
 /**
@@ -30,7 +32,8 @@ public class Address {
     @Column(name = "state")
     private String state;
     
-    @NotNull
+    @Min(value=0, message="Les codes postaux négatifs ne sont pas autorisés")
+    @Digits(fraction = 0, integer = 10, message ="Un code postal doit être un entier numérique")
     @Column(name = "zipcode")
     private int zipCode;
     

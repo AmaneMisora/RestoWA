@@ -36,11 +36,14 @@ public class ListStoreController {
     private static final Logger LOGGER = Logger.getLogger(LoginController.class.getName());
     
     @GetMapping("/listStore")
-    public ModelAndView store(@SessionAttribute("userAccount") UserAccount userAccount) {
+    public ModelAndView store(@SessionAttribute(name="userAccount", required=false) UserAccount userAccount) {
         
         // Check if user has rights
-        if(userAccount == null)
-            return new ModelAndView("error");
+        if(userAccount == null) {
+            ModelAndView mav = new ModelAndView("accessDenied");
+            mav.addObject("errorMessage", "Vous devez vous connecter pour pouvoir avoir accès à cette page !");
+            return mav;
+        }
         
         ModelAndView model = new ModelAndView("listStore");
         

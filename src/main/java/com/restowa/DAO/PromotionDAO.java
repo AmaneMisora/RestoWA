@@ -17,6 +17,7 @@ import javax.persistence.Query;
 public class PromotionDAO {
     
     
+<<<<<<< Updated upstream
     /**
      * @return All promotions from the database
      */
@@ -27,4 +28,6 @@ public class PromotionDAO {
         return query.getResultList();
     }
        
+=======
+>>>>>>> Stashed changes
 }

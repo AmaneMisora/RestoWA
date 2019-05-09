@@ -68,7 +68,12 @@ ${store.openingHours.mondayClosingHour}  ${store.openingHours.tuesdayClosingHour
                         <form action="${cp}/editStore" method="GET">
                             <input name="storeId" type="hidden" value="${store.id}">
                             <input name="action" type="hidden" value="update">
-                            <input type="submit" value="Modifier" class="text-muted">
+                            <input type="submit" value="Edit" class="btn btn-primary">
+                        </form>
+                        <form action="${cp}/editStore" method="POST">
+                            <input name="storeId" type="hidden" value="${store.id}">
+                            <input name="action" type="hidden" value="delete">
+                            <input type="submit" value="Del" class="btn btn-danger">
                         </form>
                     </div>
                     <small class="text-muted">Appartient à ${store.lastModifiedBy.lastName} ${store.lastModifiedBy.firstName}</small>

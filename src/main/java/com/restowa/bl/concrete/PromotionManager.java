@@ -9,11 +9,13 @@ import com.restowa.domain.model.Promotion;
 import com.restowa.domain.repository.PromotionRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Amane
  */
+@Component
 public class PromotionManager {
 
     private PromotionRepository repo;
@@ -31,10 +33,13 @@ public class PromotionManager {
     
     public List<Promotion> getAllPromotions() {
         return this.repo.findAll();
+<<<<<<< Updated upstream
     }
     
     public void deletePromotion(Promotion promotion)
     {
         this.repo.delete(promotion);
+=======
+>>>>>>> Stashed changes
     }
 }

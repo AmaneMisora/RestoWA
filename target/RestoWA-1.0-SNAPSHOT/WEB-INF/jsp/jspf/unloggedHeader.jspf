@@ -9,5 +9,8 @@
     <li class="nav-item">
       <a class="nav-link" href="${cp}/register">S'inscrire</a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="${cp}/editPromotion">editPromotion</a>
+    </li>
   </ul>
 </nav>

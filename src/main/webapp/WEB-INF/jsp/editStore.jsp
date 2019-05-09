@@ -14,8 +14,9 @@
     <body>
         <%@include file="jspf/loggedHeader.jspf" %>
         <div class="col-sm-8 offset-sm-2 mt-5">
-            <h1 class="display-4">Ajouter un magasin</h1>
+            <h1 class="display-4">Magasin</h1>
             <form:form method="POST" modelAttribute="store" action="${cp}/editStore">
+                <form:input path="id" type="hidden" />
                 <div class="form-group">
                     <label for="nameInput">Nom</label>
                     <form:input path="name" class="form-control" id="nameInput" aria-describedby="nameInput" placeholder="Nom" />
@@ -33,12 +34,12 @@
                 </div>
                 <div class="form-group">
                     <label for="lattitudeInput">Latitude</label>
-                    <form:input path="lattitude" type="number" class="form-control" id="lattitudeInput" aria-describedby="lattitudeInput" placeholder="000,000" />
+                    <form:input path="lattitude" type="number" step="any" class="form-control" id="lattitudeInput" aria-describedby="lattitudeInput" placeholder="000,000" />
                     <small id="lattitudeInput" class="form-text text-danger font-weight-bold"><form:errors path="lattitude" /></small>
                 </div>
                 <div class="form-group">
                     <label for="longitudeInput">Longitude</label>
-                    <form:input path="longitude" type="number" class="form-control" id="longitudeInput" aria-describedby="longitudeInput" placeholder="000,000" />
+                    <form:input path="longitude" type="number" step="any" class="form-control" id="longitudeInput" aria-describedby="longitudeInput" placeholder="000,000" />
                     <small id="longitudeInput" class="form-text text-danger font-weight-bold"><form:errors path="longitude" /></small>
                 </div>
                 <form:form modelAttribute="openingHours">
@@ -58,22 +59,22 @@
                         <tbody>
                             <tr>
                                 <td scope="row">De</td>
-                                <td><form:input path="mondayOpeningHour" type="time" value="${openingHours.sundayOpeningHour}" /></td>
-                                <td><form:input path="tuesdayOpeningHour" type="time" value="${openingHours.sundayOpeningHour}" /></td>
-                                <td><form:input path="wednesdayOpeningHour" type="time" value="${openingHours.sundayOpeningHour}" /></td>
-                                <td><form:input path="thursdayOpeningHour" type="time" value="${openingHours.sundayOpeningHour}" /></td>
-                                <td><form:input path="fridayOpeningHour" type="time" value="${openingHours.sundayOpeningHour}" /></td>
-                                <td><form:input path="saturdayOpeningHour" type="time" value="${openingHours.sundayOpeningHour}" /></td>
+                                <td><form:input path="mondayOpeningHour" type="time" value="${openingHours.mondayOpeningHour}" /></td>
+                                <td><form:input path="tuesdayOpeningHour" type="time" value="${openingHours.tuesdayOpeningHour}" /></td>
+                                <td><form:input path="wednesdayOpeningHour" type="time" value="${openingHours.wednesdayOpeningHour}" /></td>
+                                <td><form:input path="thursdayOpeningHour" type="time" value="${openingHours.thursdayOpeningHour}" /></td>
+                                <td><form:input path="fridayOpeningHour" type="time" value="${openingHours.fridayOpeningHour}" /></td>
+                                <td><form:input path="saturdayOpeningHour" type="time" value="${openingHours.saturdayOpeningHour}" /></td>
                                 <td><form:input path="sundayOpeningHour" type="time" value="${openingHours.sundayOpeningHour}" /></td>
                             </tr>
                             <tr>
                                 <td scope="row">à</td>
-                                <td><form:input path="mondayClosingHour" type="time" value="${openingHours.sundayClosingHour}" /></td>
-                                <td><form:input path="tuesdayClosingHour" type="time" value="${openingHours.sundayClosingHour}" /></td>
-                                <td><form:input path="wednesdayClosingHour" type="time" value="${openingHours.sundayClosingHour}" /></td>
-                                <td><form:input path="thursdayClosingHour" type="time" value="${openingHours.sundayClosingHour}" /></td>
-                                <td><form:input path="fridayClosingHour" type="time" value="${openingHours.sundayClosingHour}" /></td>
-                                <td><form:input path="saturdayClosingHour" type="time" value="${openingHours.sundayClosingHour}" /></td>
+                                <td><form:input path="mondayClosingHour" type="time" value="${openingHours.mondayClosingHour}" /></td>
+                                <td><form:input path="tuesdayClosingHour" type="time" value="${openingHours.tuesdayClosingHour}" /></td>
+                                <td><form:input path="wednesdayClosingHour" type="time" value="${openingHours.wednesdayClosingHour}" /></td>
+                                <td><form:input path="thursdayClosingHour" type="time" value="${openingHours.thursdayClosingHour}" /></td>
+                                <td><form:input path="fridayClosingHour" type="time" value="${openingHours.fridayClosingHour}" /></td>
+                                <td><form:input path="saturdayClosingHour" type="time" value="${openingHours.saturdayClosingHour}" /></td>
                                 <td><form:input path="sundayClosingHour" type="time" value="${openingHours.sundayClosingHour}" /></td>
                             </tr>
                             <tr>
@@ -126,7 +127,7 @@
                             <form:input path="country" class="form-control" id="countryInput" aria-describedby="countryInput" placeholder="Pays" />
                             <small id="countryInput" class="form-text text-danger font-weight-bold"><form:errors path="country" /></small>
                         </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Envoyé</button>
                     </form:form>
                 </form:form>
             </form:form>

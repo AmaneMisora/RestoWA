@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -42,11 +41,9 @@ public class Store implements Serializable {
     @Column(name = "email")
     private String email;
     
-    @NotNull
     @Column(name = "lattitude")
     private double lattitude;
     
-    @NotNull
     @Column(name = "longitude")
     private double longitude;
     
@@ -61,7 +58,7 @@ public class Store implements Serializable {
     private Address address;
     
     public Store() {
-        
+        id = -1;
     }
 
     public int getId() {

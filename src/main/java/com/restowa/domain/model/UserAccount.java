@@ -68,7 +68,7 @@ public class UserAccount implements Serializable {
     private String token;
     
     public UserAccount() {
-        this.stores = new ArrayList<>();
+        
     }
     
     public UserAccount(String firstname,String lastname,String email,String password,String phoneNumber,TypeEnum type,Address address) {
