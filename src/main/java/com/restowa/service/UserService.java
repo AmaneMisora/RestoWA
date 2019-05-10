@@ -95,11 +95,9 @@ public class UserService {
     public JSONObject getUserInfo(@RequestBody int id, @RequestHeader HttpHeaders headers) throws JsonProcessingException, ParseException{ 
         JSONObject result = new JSONObject();
         
-        UserAccount user = uamanager.getUserAccountById(id);
-        
-        if (user == null){
-            result.put("result", "no user with this id");
-        } else{
+        UserAccount user = null;
+        try{
+            user = uamanager.getUserAccountById(id);
             String headerToken = headers.get("authentificationToken").get(0); //vcerifier si il ya bien un authentificationToken 
             String userToken = user.getToken();
             String resultVerifyToken = JWTTokenManager.getInstance().verifyToken(headerToken , userToken);
@@ -120,8 +118,10 @@ public class UserService {
             } else {         
                 result.put("result", resultVerifyToken);
             } 
+        } catch (Exception e){
+            result.put("result", "no store with this id");
         }
-        
+  
         return result;
     }
     

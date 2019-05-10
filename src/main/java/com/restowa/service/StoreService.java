@@ -38,11 +38,9 @@ public class StoreService {
     public JSONObject getStoreInfo(@RequestBody String stringStoreId) throws JsonProcessingException, ParseException{
         JSONObject result = new JSONObject();
         int storeId = Integer.parseInt(stringStoreId);
-       
-        Store store = smanager.getStoreById(storeId); //verifier si il trouve pas de magasin avec cette (if (store==null))
-        if (store==null){
-            result.put("result", "no user with this id");
-        } else {
+        Store store = null;
+        try{
+            store = smanager.getStoreById(storeId); //verifier si il trouve pas de magasin avec cette (if (store==null))
             result.put("id",store.getId());
             String keyStore = store.getKeyStore() ;
             if(keyStore != null){
@@ -66,7 +64,9 @@ public class StoreService {
                 adresse.put("zip code",store.getAddress().getZipCode());
                 result.put("adresse",adresse);
             }
-        }  
+        } catch (Exception e){
+            result.put("result", "no store with this id");
+        }
         return result;
     }
     
