@@ -50,11 +50,11 @@ public class PromotionService {
         for(int i=0; i<promotionList.size(); i++){ 
             //verifier si ils sont nul
             promotion.put("id",promotionList.get(i).getId());
-            promotion.put("key",promotionList.get(i).getKey());
+            promotion.put("key",promotionList.get(i).getKeyPromotion());
             promotion.put("title",promotionList.get(i).getTitle());
             promotion.put("shortDesc",promotionList.get(i).getShortDescription());
             promotion.put("longDesc",promotionList.get(i).getLongDescription());
-            promotion.put("disabled",promotionList.get(i).getDisabled());
+            promotion.put("disabled",promotionList.get(i).isDisabled());
             promotion.put("startDate",promotionList.get(i).getStartDate());
             promotion.put("endDate",promotionList.get(i).getEndDate());
             promotion.put("imageURL",promotionList.get(i).getImageURL());
