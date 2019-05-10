@@ -48,11 +48,16 @@ public class PromotionService {
         List<Promotion> promotionList = pmanager.getAllPromotions();
         
         for(int i=0; i<promotionList.size(); i++){ 
-            //mapper pour tranformer la promotion i en string puis parser pour la tranformer en jsonobject puis l'ajouter a l'array
-            ObjectMapper mapper = new ObjectMapper(); // peut etre déclarer les mapper en dehors de la boucle
-            StringPromotion = mapper.writeValueAsString(promotionList.get(i));
-            JSONParser parser = new JSONParser(); 
-            promotion = (JSONObject) parser.parse(StringPromotion);
+            //verifier si ils sont nul
+            promotion.put("id",promotionList.get(i).getId());
+            promotion.put("key",promotionList.get(i).getKey());
+            promotion.put("title",promotionList.get(i).getTitle());
+            promotion.put("shortDesc",promotionList.get(i).getShortDescription());
+            promotion.put("longDesc",promotionList.get(i).getLongDescription());
+            promotion.put("disabled",promotionList.get(i).getDisabled());
+            promotion.put("startDate",promotionList.get(i).getStartDate());
+            promotion.put("endDate",promotionList.get(i).getEndDate());
+            promotion.put("imageURL",promotionList.get(i).getImageURL());
             
             JSArrayPromotions.set(i, promotion);
         }
