@@ -21,8 +21,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
 /**
- *
+ * Controller handling the registration page
+ * 
  * @author yanis
  */
 @Controller
@@ -33,6 +35,12 @@ public class RegistrationController {
     @Resource
     UserAccountManager uamanager;
     
+    /**
+     * Redirect to the register page with form handling attribute (Get method)
+     * 
+     * @param model : Model containing attribute which is going to be send to the register page
+     * @return 
+     */
     @GetMapping("/register")
     public String register(Model model) {
         
@@ -46,8 +54,18 @@ public class RegistrationController {
         return "register";
     }
     
+    /**
+     * Check user infos and create a new UserAccount if they are correct
+     * Redirect to the login page if successful
+     * 
+     * @param userAccount : model attribute for the form handling of the user
+     * @param userAccountResult : BindingResult containing all errors of the user validators
+     * @param address : model attribute for the form handling of the address
+     * @param addressResult : BondingResult containing all errors of the address validators
+     * @return 
+     */
     @PostMapping("/register")
-    public String checkAndCreateUserAccount(@Valid UserAccount userAccount, BindingResult userAccountResult, @Valid Address address, BindingResult addressResult, Model model) {
+    public String checkAndCreateUserAccount(@Valid UserAccount userAccount, BindingResult userAccountResult, @Valid Address address, BindingResult addressResult) {
 
         LOGGER.log(Level.INFO, "Start RegistrationController (checkAndCreateUserAccount)");
         

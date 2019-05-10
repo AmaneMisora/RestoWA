@@ -72,7 +72,8 @@ public class ListPromotionController {
             }
         }
         
-        sortPromotion(finalListPromotion);
+        finalListPromotion = sortPromotion(finalListPromotion);
+        
         
         model.addObject("promotions", finalListPromotion);
         
@@ -129,7 +130,7 @@ public class ListPromotionController {
             }
         }
         
-        sortPromotion(finalListPromotion);
+        finalListPromotion = sortPromotion(finalListPromotion);
         
         model.addObject("promotions", finalListPromotion);
         

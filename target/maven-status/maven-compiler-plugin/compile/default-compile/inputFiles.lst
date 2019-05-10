@@ -28,7 +28,7 @@ C:\Users\yanis\OneDrive\Documents\NetBeansProjects\restoWA\src\main\java\com\res
 C:\Users\yanis\OneDrive\Documents\NetBeansProjects\restoWA\src\main\java\com\restowa\service\StoreService.java
 C:\Users\yanis\OneDrive\Documents\NetBeansProjects\restoWA\src\main\java\com\restowa\domain\model\UserAccount.java
 C:\Users\yanis\OneDrive\Documents\NetBeansProjects\restoWA\src\main\java\com\restowa\domain\model\StoreDay.java
-C:\Users\yanis\OneDrive\Documents\NetBeansProjects\restoWA\src\main\java\com\restowa\utils\JWTTokenManagement.java
+C:\Users\yanis\OneDrive\Documents\NetBeansProjects\restoWA\src\main\java\com\restowa\utils\JWTTokenManager.java
 C:\Users\yanis\OneDrive\Documents\NetBeansProjects\restoWA\src\main\java\com\restowa\controllers\ListPromotionController.java
 C:\Users\yanis\OneDrive\Documents\NetBeansProjects\restoWA\src\main\java\com\restowa\controllers\ListStoreController.java
 C:\Users\yanis\OneDrive\Documents\NetBeansProjects\restoWA\src\main\java\com\restowa\domain\model\Store.java

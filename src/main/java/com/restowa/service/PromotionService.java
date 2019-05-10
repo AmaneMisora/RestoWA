@@ -46,6 +46,7 @@ public class PromotionService {
         JSONObject promotion = new JSONObject(); 
         String StringPromotion;
         List<Promotion> promotionList = pmanager.getAllPromotions();
+<<<<<<< Updated upstream
         if (promotionList.isEmpty()){
             for(int i=0; i<promotionList.size(); i++){ 
                 //verifier si ils sont nul
@@ -63,6 +64,22 @@ public class PromotionService {
             JSONPromotions.put("promotions",JSArrayPromotions);
         }else{
             JSONPromotions.put("result", "pas de promotions");
+=======
+        
+        for(int i=0; i<promotionList.size(); i++){ 
+            //verifier si ils sont nul
+            promotion.put("id",promotionList.get(i).getId());
+            promotion.put("key",promotionList.get(i).getKeyPromotion());
+            promotion.put("title",promotionList.get(i).getTitle());
+            promotion.put("shortDesc",promotionList.get(i).getShortDescription());
+            promotion.put("longDesc",promotionList.get(i).getLongDescription());
+            promotion.put("disabled",promotionList.get(i).isDisabled());
+            promotion.put("startDate",promotionList.get(i).getStartDate());
+            promotion.put("endDate",promotionList.get(i).getEndDate());
+            promotion.put("imageURL",promotionList.get(i).getImageURL());
+            
+            JSArrayPromotions.set(i, promotion);
+>>>>>>> Stashed changes
         }
         
         
