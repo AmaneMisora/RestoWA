@@ -61,6 +61,7 @@ public class UserAccount implements Serializable {
     @Embedded
     private Address address;
     
+    //TODO
     @OneToMany(mappedBy = "lastModifiedBy")
     private List<Store> stores;
     

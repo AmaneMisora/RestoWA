@@ -20,11 +20,13 @@ import javax.validation.constraints.NotNull;
 @Embeddable
 public class OpeningHours implements Serializable {
     
+    
+    //TODO
     @Column(name = "mondayopeninghour")
-    private LocalTime mondayOpeningHour;
+    private int mondayOpeningHour;
     
     @Column(name = "mondayClosinghour")
-    private LocalTime mondayClosingHour;
+    private int mondayClosingHour;
     
     @Column(name = "mondayClosed")
     private boolean mondayClosed;
@@ -33,10 +35,10 @@ public class OpeningHours implements Serializable {
     private boolean mondayAllDay;
     
     @Column(name = "tuesdayopeninghour")
-    private LocalTime tuesdayOpeningHour;
+    private int tuesdayOpeningHour;
     
     @Column(name = "tuesdayClosinghour")
-    private LocalTime tuesdayClosingHour;
+    private int tuesdayClosingHour;
     
     @Column(name = "tuesdayClosed")
     private boolean tuesdayClosed;
@@ -45,10 +47,10 @@ public class OpeningHours implements Serializable {
     private boolean tuesdayAllDay;
     
     @Column(name = "wednesdayopeninghour")
-    private LocalTime wednesdayOpeningHour;
+    private int wednesdayOpeningHour;
     
     @Column(name = "wednesdayClosinghour")
-    private LocalTime wednesdayClosingHour;
+    private int wednesdayClosingHour;
     
     @Column(name = "wednesdayClosed")
     private boolean wednesdayClosed;
@@ -57,10 +59,10 @@ public class OpeningHours implements Serializable {
     private boolean wednesdayAllDay;
     
     @Column(name = "thursdayopeninghour")
-    private LocalTime thursdayOpeningHour;
+    private int thursdayOpeningHour;
     
     @Column(name = "thursdayClosinghour")
-    private LocalTime thursdayClosingHour;
+    private int thursdayClosingHour;
     
     @Column(name = "thursdayClosed")
     private boolean thursdayClosed;
@@ -69,10 +71,10 @@ public class OpeningHours implements Serializable {
     private boolean thursdayAllDay;
     
     @Column(name = "fridayopeninghour") 
-    private LocalTime fridayOpeningHour;
+    private int fridayOpeningHour;
     
     @Column(name = "fridayClosinghour")
-    private LocalTime fridayClosingHour;
+    private int fridayClosingHour;
     
     @Column(name = "fridayClosed")
     private boolean fridayClosed;
@@ -81,10 +83,10 @@ public class OpeningHours implements Serializable {
     private boolean fridayAllDay;
     
     @Column(name = "saturdayopeninghour")
-    private LocalTime saturdayOpeningHour;
+    private int saturdayOpeningHour;
     
     @Column(name = "saturdayClosinghour")
-    private LocalTime saturdayClosingHour;
+    private int saturdayClosingHour;
     
     @Column(name = "saturdayClosed")
     private boolean saturdayClosed;
@@ -93,10 +95,10 @@ public class OpeningHours implements Serializable {
     private boolean saturdayAllDay;
     
     @Column(name = "sundayopeninghour")
-    private LocalTime sundayOpeningHour;
+    private int sundayOpeningHour;
     
     @Column(name = "sundayClosinghour")
-    private LocalTime sundayClosingHour;
+    private int sundayClosingHour;
     
     @Column(name = "sundayClosed")
     private boolean sundayClosed;
@@ -109,19 +111,27 @@ public class OpeningHours implements Serializable {
     }
 
     public LocalTime getMondayOpeningHour() {
-        return mondayOpeningHour;
+        int minute = mondayOpeningHour % 60;
+        int hour = (mondayOpeningHour - minute) / 60;
+        LocalTime timeToReturn = LocalTime.of(hour , minute);
+        return timeToReturn;
     }
 
     public void setMondayOpeningHour(LocalTime mondayOpeningHour) {
-        this.mondayOpeningHour = mondayOpeningHour;
+        int intToSet = mondayOpeningHour.getHour() * 60 + mondayOpeningHour.getMinute();
+        this.mondayOpeningHour = intToSet;
     }
 
     public LocalTime getMondayClosingHour() {
-        return mondayClosingHour;
+        int minute = mondayClosingHour % 60;
+        int hour = (mondayClosingHour - minute) / 60;
+        LocalTime timeToReturn = LocalTime.of(hour , minute);
+        return timeToReturn;
     }
 
     public void setMondayClosingHour(LocalTime mondayClosingHour) {
-        this.mondayClosingHour = mondayClosingHour;
+        int intToSet = mondayClosingHour.getHour() * 60 + mondayClosingHour.getMinute();
+        this.mondayClosingHour = intToSet;
     }
 
     public boolean isMondayClosed() {
@@ -141,19 +151,27 @@ public class OpeningHours implements Serializable {
     }
 
     public LocalTime getTuesdayOpeningHour() {
-        return tuesdayOpeningHour;
+        int minute = tuesdayOpeningHour % 60;
+        int hour = (tuesdayOpeningHour - minute) / 60;
+        LocalTime timeToReturn = LocalTime.of(hour , minute);
+        return timeToReturn;
     }
 
     public void setTuesdayOpeningHour(LocalTime tuesdayOpeningHour) {
-        this.tuesdayOpeningHour = tuesdayOpeningHour;
+        int intToSet = tuesdayOpeningHour.getHour() * 60 + tuesdayOpeningHour.getMinute();
+        this.tuesdayOpeningHour = intToSet;
     }
 
     public LocalTime getTuesdayClosingHour() {
-        return tuesdayClosingHour;
+        int minute = tuesdayClosingHour % 60;
+        int hour = (tuesdayClosingHour - minute) / 60;
+        LocalTime timeToReturn = LocalTime.of(hour , minute);
+        return timeToReturn;
     }
 
     public void setTuesdayClosingHour(LocalTime tuesdayClosingHour) {
-        this.tuesdayClosingHour = tuesdayClosingHour;
+        int intToSet = tuesdayClosingHour.getHour() * 60 + tuesdayClosingHour.getMinute();
+        this.tuesdayClosingHour = intToSet;
     }
 
     public boolean isTuesdayClosed() {
@@ -173,19 +191,27 @@ public class OpeningHours implements Serializable {
     }
 
     public LocalTime getWednesdayOpeningHour() {
-        return wednesdayOpeningHour;
+        int minute = wednesdayOpeningHour % 60;
+        int hour = (wednesdayOpeningHour - minute) / 60;
+        LocalTime timeToReturn = LocalTime.of(hour , minute);
+        return timeToReturn;
     }
 
     public void setWednesdayOpeningHour(LocalTime wednesdayOpeningHour) {
-        this.wednesdayOpeningHour = wednesdayOpeningHour;
+        int intToSet = wednesdayOpeningHour.getHour() * 60 + wednesdayOpeningHour.getMinute();
+        this.wednesdayOpeningHour = intToSet;
     }
 
     public LocalTime getWednesdayClosingHour() {
-        return wednesdayClosingHour;
+        int minute = wednesdayClosingHour % 60;
+        int hour = (wednesdayClosingHour - minute) / 60;
+        LocalTime timeToReturn = LocalTime.of(hour , minute);
+        return timeToReturn;
     }
 
     public void setWednesdayClosingHour(LocalTime wednesdayClosingHour) {
-        this.wednesdayClosingHour = wednesdayClosingHour;
+        int intToSet = wednesdayClosingHour.getHour() * 60 + wednesdayClosingHour.getMinute();
+        this.wednesdayClosingHour = intToSet;
     }
 
     public boolean isWednesdayClosed() {
@@ -205,19 +231,27 @@ public class OpeningHours implements Serializable {
     }
 
     public LocalTime getThursdayOpeningHour() {
-        return thursdayOpeningHour;
+        int minute = thursdayOpeningHour % 60;
+        int hour = (thursdayOpeningHour - minute) / 60;
+        LocalTime timeToReturn = LocalTime.of(hour , minute);
+        return timeToReturn;
     }
 
     public void setThursdayOpeningHour(LocalTime thursdayOpeningHour) {
-        this.thursdayOpeningHour = thursdayOpeningHour;
+        int intToSet = thursdayOpeningHour.getHour() * 60 + thursdayOpeningHour.getMinute();
+        this.thursdayOpeningHour = intToSet;
     }
 
     public LocalTime getThursdayClosingHour() {
-        return thursdayClosingHour;
+        int minute = thursdayClosingHour % 60;
+        int hour = (thursdayClosingHour - minute) / 60;
+        LocalTime timeToReturn = LocalTime.of(hour , minute);
+        return timeToReturn;
     }
 
     public void setThursdayClosingHour(LocalTime thursdayClosingHour) {
-        this.thursdayClosingHour = thursdayClosingHour;
+        int intToSet = thursdayClosingHour.getHour() * 60 + thursdayClosingHour.getMinute();
+        this.thursdayClosingHour = intToSet;
     }
 
     public boolean isThursdayClosed() {
@@ -237,19 +271,27 @@ public class OpeningHours implements Serializable {
     }
 
     public LocalTime getFridayOpeningHour() {
-        return fridayOpeningHour;
+        int minute = fridayOpeningHour % 60;
+        int hour = (fridayOpeningHour - minute) / 60;
+        LocalTime timeToReturn = LocalTime.of(hour , minute);
+        return timeToReturn;
     }
 
     public void setFridayOpeningHour(LocalTime fridayOpeningHour) {
-        this.fridayOpeningHour = fridayOpeningHour;
+        int intToSet = fridayOpeningHour.getHour() * 60 + fridayOpeningHour.getMinute();
+        this.fridayOpeningHour = intToSet;
     }
 
     public LocalTime getFridayClosingHour() {
-        return fridayClosingHour;
+        int minute = fridayClosingHour % 60;
+        int hour = (fridayClosingHour - minute) / 60;
+        LocalTime timeToReturn = LocalTime.of(hour , minute);
+        return timeToReturn;
     }
 
     public void setFridayClosingHour(LocalTime fridayClosingHour) {
-        this.fridayClosingHour = fridayClosingHour;
+        int intToSet = fridayClosingHour.getHour() * 60 + fridayClosingHour.getMinute();
+        this.fridayClosingHour = intToSet;
     }
 
     public boolean isFridayClosed() {
@@ -269,19 +311,27 @@ public class OpeningHours implements Serializable {
     }
 
     public LocalTime getSaturdayOpeningHour() {
-        return saturdayOpeningHour;
+        int minute = saturdayOpeningHour % 60;
+        int hour = (saturdayOpeningHour - minute) / 60;
+        LocalTime timeToReturn = LocalTime.of(hour , minute);
+        return timeToReturn;
     }
 
     public void setSaturdayOpeningHour(LocalTime saturdayOpeningHour) {
-        this.saturdayOpeningHour = saturdayOpeningHour;
+        int intToSet = saturdayOpeningHour.getHour() * 60 + saturdayOpeningHour.getMinute();
+        this.saturdayOpeningHour = intToSet;
     }
 
     public LocalTime getSaturdayClosingHour() {
-        return saturdayClosingHour;
+        int minute = saturdayClosingHour % 60;
+        int hour = (saturdayClosingHour - minute) / 60;
+        LocalTime timeToReturn = LocalTime.of(hour , minute);
+        return timeToReturn;
     }
 
     public void setSaturdayClosingHour(LocalTime saturdayClosingHour) {
-        this.saturdayClosingHour = saturdayClosingHour;
+        int intToSet = saturdayClosingHour.getHour() * 60 + saturdayClosingHour.getMinute();
+        this.saturdayClosingHour = intToSet;
     }
 
     public boolean isSaturdayClosed() {
@@ -301,19 +351,27 @@ public class OpeningHours implements Serializable {
     }
 
     public LocalTime getSundayOpeningHour() {
-        return sundayOpeningHour;
+        int minute = sundayOpeningHour % 60;
+        int hour = (sundayOpeningHour - minute) / 60;
+        LocalTime timeToReturn = LocalTime.of(hour , minute);
+        return timeToReturn;
     }
 
     public void setSundayOpeningHour(LocalTime sundayOpeningHour) {
-        this.sundayOpeningHour = sundayOpeningHour;
+        int intToSet = sundayOpeningHour.getHour() * 60 + sundayOpeningHour.getMinute();
+        this.sundayOpeningHour = intToSet;
     }
 
     public LocalTime getSundayClosingHour() {
-        return sundayClosingHour;
+        int minute = sundayClosingHour % 60;
+        int hour = (sundayClosingHour - minute) / 60;
+        LocalTime timeToReturn = LocalTime.of(hour , minute);
+        return timeToReturn;
     }
 
     public void setSundayClosingHour(LocalTime sundayClosingHour) {
-        this.sundayClosingHour = sundayClosingHour;
+        int intToSet = sundayClosingHour.getHour() * 60 + sundayClosingHour.getMinute();
+        this.sundayClosingHour = intToSet;
     }
 
     public boolean isSundayClosed() {
