@@ -61,8 +61,10 @@ public class UserAccount implements Serializable {
     @Embedded
     private Address address;
     
-    //TODO
     @OneToMany(mappedBy = "lastModifiedBy")
+    private List<Store> modifiedStores;
+    
+    @OneToMany(mappedBy = "owner")
     private List<Store> stores;
     
     @Column(name = "token", length = 1024)
@@ -213,6 +215,14 @@ public class UserAccount implements Serializable {
         this.address = address;
     }
 
+    public List<Store> getModifiedStores() {
+        return modifiedStores;
+    }
+
+    public void setModifiedStores(List<Store> modifiedStores) {
+        this.modifiedStores = modifiedStores;
+    }    
+    
     public List<Store> getStores() {
         return stores;
     }

@@ -51,8 +51,12 @@ public class Store implements Serializable {
     private LocalDateTime lastModificationDate;
     
     @ManyToOne
-    @JoinColumn(name = "useraccount_id")
+    @JoinColumn(name = "lastModifiedBy")
     public UserAccount lastModifiedBy;
+    
+    @ManyToOne
+    @JoinColumn(name = "useraccount_id")
+    public UserAccount owner;
     
     @Embedded
     private Address address;
@@ -134,11 +138,11 @@ public class Store implements Serializable {
     }
 
     public UserAccount getLastModifiedBy() {
-        return lastModifiedBy;
+        return owner;
     }
 
     public void setLastModifiedBy(UserAccount lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
+        this.owner = lastModifiedBy;
     }
 
     public Address getAddress() {
@@ -150,7 +154,7 @@ public class Store implements Serializable {
     }
     
     public boolean contains(String word) {
-        if(keyStore.contains(word) || name.contains(word) || phoneNumber.contains(word) || email.contains(word) || address.getCity().contains(word) || address.getCountry().contains(word) || address.getState().contains(word) || address.getStreet().contains(word) || String.valueOf(address.getZipCode()).contains(word) || lastModifiedBy.getFirstName().contains(word) || lastModifiedBy.getLastName().contains(word) || String.valueOf(lattitude).contains(word) || String.valueOf(longitude).contains(word))
+        if(keyStore.contains(word) || name.contains(word) || phoneNumber.contains(word) || email.contains(word) || address.getCity().contains(word) || address.getCountry().contains(word) || address.getState().contains(word) || address.getStreet().contains(word) || String.valueOf(address.getZipCode()).contains(word) || owner.getFirstName().contains(word) || owner.getLastName().contains(word) || String.valueOf(lattitude).contains(word) || String.valueOf(longitude).contains(word))
             return true;
         return false;
     }
