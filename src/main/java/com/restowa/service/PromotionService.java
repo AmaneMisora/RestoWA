@@ -16,6 +16,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,19 +37,20 @@ public class PromotionService {
     }
     
     /**
-     * 
-     * @return JSONObject la liste des promotions
+     * Renvoie toutes les promotions
+     * @return JSONObject la liste des promotions sous la forme d'un jsonarray
      */
-    @RequestMapping(value = "/getPromotions", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON)
-    public JSONObject getPromotions() throws ParseException, JsonProcessingException{
+    @RequestMapping(value = "/getPromotions", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON)
+    public JSONObject getPromotions() {
         JSONObject JSONPromotions = new JSONObject();
         JSONArray JSArrayPromotions = new JSONArray();
         JSONObject promotion = new JSONObject(); 
         String StringPromotion;
         List<Promotion> promotionList = pmanager.getAllPromotions();
+        // vérifie si il y a au moins une promotion
         if (promotionList.isEmpty()){
+            // remplie un jsonarray avec chacune des promotions de la bdd
             for(int i=0; i<promotionList.size(); i++){ 
-                //verifier si ils sont nul
                 promotion.put("key",promotionList.get(i).getKeyPromotion());
                 promotion.put("title",promotionList.get(i).getTitle());
                 promotion.put("shortDesc",promotionList.get(i).getShortDescription());

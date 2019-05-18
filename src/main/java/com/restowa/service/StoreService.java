@@ -6,22 +6,19 @@
 package com.restowa.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.restowa.bl.concrete.StoreManager;
 import com.restowa.domain.model.Store;
-import java.util.List;
 import javax.annotation.Resource;
 import javax.ws.rs.core.MediaType;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- *
+ * les différents services liés aux boutiques
  * @author Paul
  */
 @RestController
@@ -34,13 +31,23 @@ public class StoreService {
     public StoreService(){    
     }
     
-    @RequestMapping(value = "/getStoreInfo", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON)
-    public JSONObject getStoreInfo(@RequestBody String stringStoreId) throws JsonProcessingException, ParseException{
+    /**
+     * Récupere les informations de la boutique demandée
+     * @param stringStoreId String, l'id de la boutique recherchée
+     * @return un json avec les informations sur cet user ou "result" : "no store with this id"
+     * @throws JsonProcessingException
+     * @throws ParseException 
+     */
+    @GetMapping(value = "/getStoreInfo/{stringStoreId}", produces = MediaType.APPLICATION_JSON)
+    public JSONObject getStoreInfo(@PathVariable("stringStoreId") String stringStoreId) throws JsonProcessingException, ParseException{
         JSONObject result = new JSONObject();
         int storeId = Integer.parseInt(stringStoreId);
-        Store store = null;
+        Store store;
+        
+        // le try catch lorsqu'il n'y a pas de boutique liée à cet id
         try{
-            store = smanager.getStoreById(storeId); //verifier si il trouve pas de magasin avec cette (if (store==null))
+            // si la boutique existe écrit les informations de la boutique dans le json que l'on va return
+            store = smanager.getStoreById(storeId); 
             result.put("id",store.getId());
             String keyStore = store.getKeyStore() ;
             if(keyStore != null){
