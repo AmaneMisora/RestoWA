@@ -5,8 +5,6 @@
  */
 package com.restowa.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.restowa.bl.concrete.PromotionManager;
 import com.restowa.domain.model.Promotion;
 import java.util.List;
@@ -14,9 +12,6 @@ import javax.annotation.Resource;
 import javax.ws.rs.core.MediaType;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,7 +40,6 @@ public class PromotionService {
         JSONObject JSONPromotions = new JSONObject();
         JSONArray JSArrayPromotions = new JSONArray();
         JSONObject promotion = new JSONObject(); 
-        String StringPromotion;
         List<Promotion> promotionList = pmanager.getAllPromotions();
         // vérifie si il y a au moins une promotion
         if (promotionList.isEmpty()){
