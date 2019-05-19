@@ -138,7 +138,6 @@ public class UserService {
         int id = Integer.parseInt(stringUserId);
         JSONObject result = new JSONObject();
         UserAccount user;
-        // le try catch lorsqu'il n'y a pas d'utilisateur lié à cet id
         try{
             // récupere les 2 token (celui du header et celui de la bdd) et les vérifient
             user = uamanager.getUserAccountById(id);
