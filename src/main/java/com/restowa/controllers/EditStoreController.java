@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.restowa.controllers;
 
 import com.restowa.bl.concrete.StoreManager;
@@ -13,8 +8,6 @@ import com.restowa.domain.model.TypeEnum;
 import com.restowa.domain.model.UserAccount;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
@@ -25,14 +18,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- *
+ * Controller handling the edit store page
+ * 
  * @author yanis
  */
-
 @Controller
 public class EditStoreController {
     
@@ -41,6 +33,14 @@ public class EditStoreController {
     @Resource
     private StoreManager storeManager;
     
+    /**
+     * show store page
+     * 
+     * @param userAccount connected user
+     * @param storeId id of the store to modify (optional)
+     * @param action action to do on the store (optional)
+     * @return 
+     */
     @GetMapping("/editStore")
     public ModelAndView store(@SessionAttribute(name="userAccount", required=false) UserAccount userAccount, Integer storeId, String action) {
     
@@ -120,6 +120,21 @@ public class EditStoreController {
         return mav;
     }
     
+    /**
+     * Create or modify a store
+     * 
+     * @param userAccount connected user
+     * @param store store to create or modify
+     * @param storeResult possible errors of the store
+     * @param openingHours openinghours of the store
+     * @param openingHoursResult possible errors of the opening hours
+     * @param address address of the store
+     * @param addressResult possible errors of the address
+     * @param model
+     * @param storeId id of the store to modify (optional)
+     * @param action action to do (optional)
+     * @return 
+     */
     @PostMapping("/editStore")
     public ModelAndView editStore(@SessionAttribute(name="userAccount", required=false) UserAccount userAccount, @Valid Store store, BindingResult storeResult, @Valid OpeningHours openingHours, BindingResult openingHoursResult, @Valid Address address, BindingResult addressResult, Model model, Integer storeId, String action) {
 

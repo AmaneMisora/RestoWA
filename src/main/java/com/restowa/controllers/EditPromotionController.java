@@ -1,28 +1,34 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.restowa.controllers;
 
 import com.restowa.bl.concrete.PromotionManager;
 import com.restowa.domain.model.Promotion;
 import com.restowa.domain.model.TypeEnum;
 import com.restowa.domain.model.UserAccount;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.Random;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
+import javax.imageio.ImageIO;
 import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- *
+ * Controller handling the edit promotion page
+ * 
  * @author yanis
  */
 @Controller
@@ -33,6 +39,14 @@ public class EditPromotionController {
     @Resource
     private PromotionManager promotionManager;
 
+    /**
+     * show promotion page
+     * 
+     * @param userAccount connected user
+     * @param promotionId id of the promotion to modify (optional)
+     * @param action action to do (optional)
+     * @return 
+     */
     @GetMapping("/editPromotion")
     public ModelAndView promotion(@SessionAttribute(name="userAccount", required=false) UserAccount userAccount, Integer promotionId, String action) {
         
@@ -108,8 +122,20 @@ public class EditPromotionController {
         return mav;
     }
     
+    /**
+     * Create or modify a promotion
+     * 
+     * @param userAccount connected user
+     * @param promotion promotion to create or modify
+     * @param promotionResult possible errors of the promotion
+     * @param file image of the promotion to upload
+     * @param model
+     * @param promotionId id of the promotion to modify (optional)
+     * @param action action to do (optional)
+     * @return 
+     */
     @PostMapping("/editPromotion")
-    public ModelAndView editPromotion(@SessionAttribute(name="userAccount", required=false) UserAccount userAccount, @Valid Promotion promotion, BindingResult promotionResult, Model model, Integer promotionId, String action) {
+    public ModelAndView editPromotion(@SessionAttribute(name="userAccount", required=false) UserAccount userAccount, @Valid Promotion promotion, BindingResult promotionResult, @RequestParam("file") MultipartFile file, Model model, Integer promotionId, String action) {
         
         LOGGER.log(Level.INFO, "Start EditPromotionController (editPromotion)");
         
@@ -164,7 +190,25 @@ public class EditPromotionController {
                     return mav;
                 }
             }
-
+           
+            // HERE
+            if (!file.isEmpty()) {
+                try {
+                BufferedImage src = ImageIO.read(new ByteArrayInputStream(file.getBytes()));
+                
+                // Generate random String
+                String rootPath = System.getProperty("catalina.home");
+                File destination = new File(rootPath + File.separator + file.getOriginalFilename());
+                ImageIO.write(src, file.getContentType().split("/")[1], destination);
+                promotion.setImageURL(rootPath + File.separator + file.getOriginalFilename());
+                System.out.println(rootPath + File.separator + file.getOriginalFilename());
+                } catch(IOException e) {
+                    ModelAndView mav = new ModelAndView("editPromotion");
+                    mav.addObject("promotion", promotion);
+                    LOGGER.log(Level.INFO, "End EditPromotionController");
+                    return mav;
+                }
+            }
             promotion = promotionManager.savePromotion(promotion);
             promotion.setKeyPromotion("PROMO-"+promotion.getId());
             promotionManager.savePromotion(promotion);

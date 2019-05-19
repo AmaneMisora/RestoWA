@@ -1,35 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.restowa.controllers;
 
 import com.restowa.bl.concrete.PromotionManager;
 import com.restowa.bl.concrete.UserAccountManager;
-import com.restowa.domain.model.Promotion;
-import com.restowa.domain.model.TypeEnum;
 import com.restowa.domain.model.UserAccount;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
-import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- *
+ * Controller handling the login page
+ * 
  * @author yanis
  */
 @Controller
@@ -44,12 +34,21 @@ public class LoginController implements WebMvcConfigurer{
     @Resource
     PromotionManager promotionManager;
     
+    /**
+     * set user session
+     * @return 
+     */
     @ModelAttribute("userAccount")
     public UserAccount setupUserAccount() {
        UserAccount a = new UserAccount();
       return a;
-   }
+    }
     
+    /**
+     * show login page
+     * @param model
+     * @return 
+     */
     @GetMapping("/login")
     public String login(Model model) {
         
@@ -59,6 +58,15 @@ public class LoginController implements WebMvcConfigurer{
         return "login";
     }
     
+    /**
+     * Validate and create user session
+     * 
+     * @param userAccount user to connect
+     * @param model
+     * @param email user email
+     * @param password user password
+     * @return 
+     */
     @PostMapping("/login")
     public ModelAndView checkPersonInfo(@ModelAttribute UserAccount userAccount, Model model, String email, String password) {
         
@@ -98,6 +106,12 @@ public class LoginController implements WebMvcConfigurer{
         return mav;
     }
     
+    /**
+     * logout the user
+     * 
+     * @param status
+     * @return 
+     */
     @GetMapping("/logout")
     public ModelAndView logout(SessionStatus status) {
         

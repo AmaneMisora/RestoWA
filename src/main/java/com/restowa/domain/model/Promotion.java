@@ -52,7 +52,6 @@ public class Promotion {
     @Column(name = "enddate")
     private LocalDate endDate;
     
-    @NotEmpty
     @Column(name = "imageurl")
     private String imageURL;
 

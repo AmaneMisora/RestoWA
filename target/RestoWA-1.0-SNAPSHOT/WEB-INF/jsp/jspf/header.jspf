@@ -29,11 +29,6 @@
       <a class="nav-link" href="${cp}/listPromotion">Promotions</a>
     </li>
     </c:if>
-    <c:if test="${userAccount.type == 'Administrateur'}">
-    <li class="nav-item">
-      <a class="nav-link" href="${cp}/listClient">Utilisateurs</a>
-    </li>
-    </c:if>
     <li class="nav-item pull-right">
         <a class="nav-link" href="${cp}/profile">Profile</a>
     </li>

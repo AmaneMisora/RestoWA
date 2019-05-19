@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.restowa.controllers;
 
 
@@ -65,7 +60,7 @@ public class RegistrationController {
      * @return 
      */
     @PostMapping("/register")
-    public String checkAndCreateUserAccount(@Valid UserAccount userAccount, BindingResult userAccountResult, @Valid Address address, BindingResult addressResult) {
+    public String checkAndCreateUserAccount(@Valid UserAccount userAccount, BindingResult userAccountResult, @Valid Address address, BindingResult addressResult, String password) {
 
         LOGGER.log(Level.INFO, "Start RegistrationController (checkAndCreateUserAccount)");
         
@@ -76,10 +71,15 @@ public class RegistrationController {
             userAccountResult.addError(new FieldError("UserAccount", "email", "Cet email est déjà utilisé"));
             LOGGER.log(Level.INFO, "End RegistrationController");
             return "register";
+        }else if(!password.split(",")[0].equals(password.split(",")[1])) {
+            userAccountResult.addError(new FieldError("UserAccount", "password", "Les deux mots de passe ne sont pas identique"));
+            LOGGER.log(Level.INFO, "End RegistrationController");
+            return "register";
         }
-
+        
         LocalDateTime date = LocalDateTime.now();
         
+        userAccount.setPassword(password.split(",")[0]);
         userAccount.setActive(true);
         userAccount.setAddress(address);
         userAccount.setCreationDate(date);

@@ -37,6 +37,10 @@
                     <small id="passwordInput" class="form-text text-danger font-weight-bold"><form:errors path="password" /></small>
                 </div>
                 <div class="form-group">
+                    <label for="passwordInput2">Mot de passe</label>
+                    <input name="password" type="password" class="form-control" id="passwordInput2" aria-describedby="passwordInput2" />
+                </div>
+                <div class="form-group">
                     <label for="phoneNumberInput">Numéro de téléphone</label>
                     <form:input path="phoneNumber" type="tel" class="form-control" id="phoneNumberInput" aria-describedby="phoneNumberInput" placeholder="0000000000" />
                     <small id="phoneNumberInput" class="form-text text-danger font-weight-bold"><form:errors path="phoneNumber" /></small>

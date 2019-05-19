@@ -1,15 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.restowa.controllers;
 
-import com.restowa.bl.concrete.StoreManager;
 import com.restowa.bl.concrete.UserAccountManager;
 import com.restowa.domain.model.Address;
-import com.restowa.domain.model.OpeningHours;
-import com.restowa.domain.model.Store;
 import com.restowa.domain.model.UserAccount;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,7 +18,8 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- *
+ * Controller handling the profile page
+ * 
  * @author yanis
  */
 @Controller
@@ -37,6 +30,12 @@ public class ProfileController {
     @Resource
     private UserAccountManager userAccountManager;
     
+    /**
+     * Display editable data of the connected user profile
+     * 
+     * @param userAccount Connected user
+     * @return Profile Page
+     */
     @GetMapping("/profile")
     public ModelAndView profile(@SessionAttribute(name="userAccount", required=false) UserAccount userAccount) {
         
@@ -66,6 +65,17 @@ public class ProfileController {
         return mav;
     }
     
+    /**
+     * Edit connected user profil
+     * 
+     * @param userAccount Connected profile
+     * @param user nex user info
+     * @param userResult new user form errors
+     * @param address new user address
+     * @param addressResult new user address form errors
+     * @param model
+     * @return 
+     */
     @PostMapping("/profile")
     public ModelAndView editProfile(@SessionAttribute(name="userAccount", required=false) UserAccount userAccount, @Valid @ModelAttribute("user") UserAccount user, BindingResult userResult, @Valid Address address, BindingResult addressResult, Model model) {
 

@@ -1,4 +1,3 @@
-
 package com.restowa.controllers;
 
 import com.restowa.bl.concrete.UserAccountManager;
@@ -10,6 +9,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+/**
+ * Controller handling the index page
+ * 
+ * @author yanis
+ */
 @Controller
 public class DefaultController {
 
@@ -18,6 +22,12 @@ public class DefaultController {
     @Resource
     UserAccountManager uamanager;
     
+    /**
+     * Return to index page
+     * 
+     * @param map
+     * @return home page
+     */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(ModelMap map) {
         LOGGER.log(Level.INFO, "Start DefaultController (index)");

@@ -1,13 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.restowa.controllers;
 
 import com.restowa.bl.concrete.PromotionManager;
 import com.restowa.domain.model.Promotion;
-import com.restowa.domain.model.Store;
 import com.restowa.domain.model.TypeEnum;
 import com.restowa.domain.model.UserAccount;
 import java.util.ArrayList;
@@ -23,7 +17,8 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- *
+ * Controller handling the list promotion page
+ * 
  * @author yanis
  */
 @Controller
@@ -34,6 +29,12 @@ public class ListPromotionController {
     @Resource
     PromotionManager promotionManager;
     
+    /**
+     * show list of promotion
+     * 
+     * @param userAccount connected user
+     * @return 
+     */
     @GetMapping("/listPromotion")
     public ModelAndView promotion(@SessionAttribute(name="userAccount", required=false) UserAccount userAccount) {
         
@@ -81,6 +82,13 @@ public class ListPromotionController {
         return model;
     }
     
+    /**
+     * shiw filter list of promotions
+     * 
+     * @param userAccount connected user
+     * @param search Key words to search for specific promotions
+     * @return 
+     */
     @PostMapping("/listPromotion")
     public ModelAndView researchPromotion(@SessionAttribute(name="userAccount", required=false) UserAccount userAccount, @RequestParam String search) {
         

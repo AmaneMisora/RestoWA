@@ -127,7 +127,7 @@
                             <form:input path="country" class="form-control" id="countryInput" aria-describedby="countryInput" placeholder="Pays" />
                             <small id="countryInput" class="form-text text-danger font-weight-bold"><form:errors path="country" /></small>
                         </div>
-                    <button type="submit" class="btn btn-primary">Envoyé</button>
+                    <button type="submit" class="btn btn-primary">Envoyer</button>
                     </form:form>
                 </form:form>
             </form:form>
